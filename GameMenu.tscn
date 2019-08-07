@@ -1,5 +1,35 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://GameMenu.gd" type="Script" id=1]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="create" type="Button" parent="."]
+margin_left = 185.06
+margin_top = 193.604
+margin_right = 608.06
+margin_bottom = 473.604
+rect_pivot_offset = Vector2( 215.681, 67.3492 )
+text = "Create new game"
+
+[node name="join" type="Button" parent="."]
+margin_left = 641.261
+margin_top = 189.727
+margin_right = 1064.26
+margin_bottom = 469.727
+rect_pivot_offset = Vector2( 215.681, 67.3492 )
+text = "Join existing game"
+
+[node name="back" type="Button" parent="."]
+margin_left = 432.931
+margin_top = 536.066
+margin_right = 855.931
+margin_bottom = 594.066
+rect_pivot_offset = Vector2( 215.681, 67.3492 )
+text = "Back"
+[connection signal="pressed" from="create" to="." method="_on_New_pressed"]
+[connection signal="pressed" from="join" to="." method="_on_Join_pressed"]
+[connection signal="pressed" from="back" to="." method="_on_Back_pressed"]

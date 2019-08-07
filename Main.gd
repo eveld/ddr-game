@@ -9,7 +9,11 @@ var speed
 var note_scale
 var start_pos
 
+var count = 3
+
 func _process(delta):
+	$score_label.text = "%d" % Game.score
+	
 	if Input.is_action_just_pressed("ui_accept"):
 		get_tree().reload_current_scene()
 
@@ -21,16 +25,26 @@ func _ready():
 	quarter_time = 60 / float(tempo)
 	speed = bar_length / float(4 * quarter_time)
 	note_scale = bar_length / float(4 * 400)
-	start_pos = data.start_pos / float(400 * quarter_time)
-	
+	start_pos = data.start_pos / float(400 * quarter_time) + 3 * bar_length
+		
 	_create_tracks(data.tracks)
-	
 	_center_camera(data.tracks.size())
 	
-	$Music.play()
+func _on_countdown_timer_timeout():
+	if count == 0:
+		$countdown_label.text = "go!"
+	elif count < 0:
+		$countdown_timer.stop()
+		$countdown_label.hide()
+		$music.play()
+	else:
+		$countdown_label.text = "%s" % count
+		
+	count -= 1
+	
 	
 func _center_camera(tracks):
-	$Camera.translate(Vector3(tracks / 2, 0, 0.5))
+	$camera.translate(Vector3(tracks / 2, 0, 0.5))
 	
 func _create_tracks(tracks):
 	var index = 0
