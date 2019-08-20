@@ -6,7 +6,7 @@ func _on_New_pressed():
 
 func _on_Join_pressed():
 	Game.reset_master()
-	get_tree().change_scene("res://LobbyMenu.tscn")
+	get_tree().change_scene("res://JoinMenu.tscn")
 	
 func _on_Back_pressed():
 	get_tree().change_scene("res://MainMenu.tscn")
