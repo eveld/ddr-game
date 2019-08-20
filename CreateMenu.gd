@@ -22,7 +22,20 @@ func _on_prev_player_pressed():
 	Game.prev_player()
 
 func _on_create_pressed():
-	get_tree().change_scene("res://LobbyMenu.tscn")
+	var url = "http://localhost:9090/games/new"
+	var headers = ["Content-Type: application/json"]
+	$HTTP_create_game.request(url, headers, false, HTTPClient.METHOD_POST, "")
 
 func _on_back_pressed():
 	get_tree().change_scene("res://GameMenu.tscn")
+
+func _on_HTTP_create_game_request_completed( result, response_code, headers, body ):
+	if(response_code == 200):
+		var response = JSON.parse(body.get_string_from_utf8()).result
+		Game.set_game_id(response.id)
+		Game.set_player_id(response.home_id)
+		
+		print("game: " + Game.get_game_id())
+		print("player: " + Game.get_player_id())
+		
+		get_tree().change_scene("res://LobbyMenu.tscn")

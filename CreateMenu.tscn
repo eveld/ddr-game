@@ -62,9 +62,12 @@ margin_top = 567.061
 margin_right = 870.248
 margin_bottom = 636.061
 text = "Back"
+
+[node name="HTTP_create_game" type="HTTPRequest" parent="."]
 [connection signal="pressed" from="prev_song" to="." method="_on_prev_song_pressed"]
 [connection signal="pressed" from="next_song" to="." method="_on_next_song_pressed"]
 [connection signal="pressed" from="next_player" to="." method="_on_next_player_pressed"]
 [connection signal="pressed" from="prev_player" to="." method="_on_prev_player_pressed"]
 [connection signal="pressed" from="create" to="." method="_on_create_pressed"]
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]
+[connection signal="request_completed" from="HTTP_create_game" to="." method="_on_HTTP_create_game_request_completed"]

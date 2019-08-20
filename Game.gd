@@ -9,6 +9,21 @@ var is_master = false
 var song_index = 0
 var player_index = 0
 
+var game_id = ""
+var player_id = ""
+
+func set_game_id(id):
+	game_id = id
+	
+func get_game_id():
+	return game_id
+
+func set_player_id(id):
+	player_id = id
+	
+func get_player_id():
+	return player_id
+
 func increase_score(amount):
 	score += amount
 	
@@ -20,6 +35,9 @@ func set_master():
 	
 func reset_master():
 	is_master = false
+	
+func is_master():
+	return is_master
 	
 func next_player():
 	players += 1
