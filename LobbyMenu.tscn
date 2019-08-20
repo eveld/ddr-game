@@ -41,12 +41,22 @@ margin_bottom = 627.801
 rect_pivot_offset = Vector2( 266.274, 76.199 )
 text = "Back"
 
+[node name="HTTP_get_game" type="HTTPRequest" parent="."]
+
 [node name="HTTP_player_ready" type="HTTPRequest" parent="."]
 
 [node name="HTTP_start_game" type="HTTPRequest" parent="."]
-[connection signal="pressed" from="p1" to="." method="_on_P1_pressed"]
-[connection signal="pressed" from="p2" to="." method="_on_P2_pressed"]
+
+[node name="HTTP_leave_game" type="HTTPRequest" parent="."]
+
+[node name="refresh_game" type="Timer" parent="."]
+autostart = true
+[connection signal="pressed" from="p1" to="." method="_on_ready_pressed"]
+[connection signal="pressed" from="p2" to="." method="_on_ready_pressed"]
 [connection signal="pressed" from="start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="back" to="." method="_on_Back_pressed"]
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]
+[connection signal="request_completed" from="HTTP_get_game" to="." method="_on_HTTP_get_game_request_completed"]
 [connection signal="request_completed" from="HTTP_player_ready" to="." method="_on_HTTP_player_ready_request_completed"]
 [connection signal="request_completed" from="HTTP_start_game" to="." method="_on_HTTP_start_game_request_completed"]
+[connection signal="request_completed" from="HTTP_leave_game" to="." method="_on_HTTP_leave_game_request_completed"]
+[connection signal="timeout" from="refresh_game" to="." method="_on_refresh_game_timeout"]

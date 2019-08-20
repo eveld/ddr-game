@@ -25,7 +25,11 @@ text = "cancel"
 [node name="HTTP_get_games" type="HTTPRequest" parent="."]
 
 [node name="HTTP_join_game" type="HTTPRequest" parent="."]
+
+[node name="refresh_games" type="Timer" parent="."]
+autostart = true
 [connection signal="pressed" from="join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="cancel" to="." method="_on_cancel_pressed"]
 [connection signal="request_completed" from="HTTP_get_games" to="." method="_on_HTTP_get_games_request_completed"]
 [connection signal="request_completed" from="HTTP_join_game" to="." method="_on_HTTP_join_game_request_completed"]
+[connection signal="timeout" from="refresh_games" to="." method="_on_refresh_games_timeout"]
