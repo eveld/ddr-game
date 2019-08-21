@@ -8,9 +8,17 @@ anchor_bottom = 1.0
 script = ExtResource( 1 )
 
 [node name="play" type="Button" parent="."]
-margin_left = 422.342
-margin_top = 499.689
-margin_right = 891.342
-margin_bottom = 578.689
+margin_left = 425.342
+margin_top = 250.689
+margin_right = 894.342
+margin_bottom = 329.689
 text = "Play"
+
+[node name="options" type="Button" parent="."]
+margin_left = 424.342
+margin_top = 358.689
+margin_right = 893.342
+margin_bottom = 437.689
+text = "Options"
 [connection signal="pressed" from="play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="options" to="." method="_on_Option_pressed"]

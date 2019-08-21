@@ -2,6 +2,7 @@ extends Control
 
 var ready_icon = preload("res://ready.png")
 var waiting_icon = preload("res://waiting.png")
+var server = Server.get_server()
 
 var p1_ready = false
 var p2_ready = false
@@ -51,7 +52,7 @@ func _on_HTTP_get_game_request_completed(result, response_code, headers, body):
 # Ready player
 #
 func _on_ready_pressed():
-	var url = "http://localhost:9090/games/" + Game.get_game_id() + "/ready?player=" + Game.get_player_id()
+	var url = server + "/games/" + Game.get_game_id() + "/ready?player=" + Game.get_player_id()
 	var headers = ["Content-Type: application/json"]
 	$HTTP_player_ready.request(url, headers, false, HTTPClient.METHOD_POST, "")
 
@@ -75,7 +76,7 @@ func _on_HTTP_player_ready_request_completed( result, response_code, headers, bo
 # Start the game
 #
 func _on_start_pressed():
-	var url = "http://localhost:9090/games/" + Game.get_game_id() + "/start"
+	var url = server + "/games/" + Game.get_game_id() + "/start"
 	var headers = ["Content-Type: application/json"]
 	$HTTP_start_game.request(url, headers, false, HTTPClient.METHOD_POST, "")
 
@@ -85,7 +86,7 @@ func _on_HTTP_start_game_request_completed(result, response_code, headers, body)
 
 
 func _on_back_pressed():
-	var url = "http://localhost:9090/games/" + Game.get_game_id() + "/leave?player=" + Game.get_player_id()
+	var url = server + "/games/" + Game.get_game_id() + "/leave?player=" + Game.get_player_id()
 	var headers = ["Content-Type: application/json"]
 	$HTTP_leave_game.request(url, headers, false, HTTPClient.METHOD_POST, "")
 
