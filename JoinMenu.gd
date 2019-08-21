@@ -1,10 +1,9 @@
 extends Control
 
 var selected_game_id = ""
-var server = Server.get_server()
 
 func _ready():
-	var url = server + "/games"
+	var url = Server.get_server() + "/games"
 	var headers = ["Content-Type: application/json"]
 	$HTTP_get_games.request(url, headers, false, HTTPClient.METHOD_GET, "")
 
@@ -22,7 +21,7 @@ func _on_HTTP_get_games_request_completed(result, response_code, headers, body):
 			
 
 func _on_refresh_games_timeout():
-	var url = server + "/games"
+	var url = Server.get_server() + "/games"
 	var headers = ["Content-Type: application/json"]
 	$HTTP_get_games.request(url, headers, false, HTTPClient.METHOD_GET, "")
 
@@ -33,7 +32,7 @@ func _on_cancel_pressed():
 # Join game
 #
 func _on_join_pressed():
-	var url = server + "/games/" + selected_game_id + "/join"
+	var url = Server.get_server() + "/games/" + selected_game_id + "/join"
 	var headers = ["Content-Type: application/json"]
 	$HTTP_join_game.request(url, headers, false, HTTPClient.METHOD_POST, "")
 

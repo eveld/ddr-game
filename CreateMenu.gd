@@ -22,7 +22,7 @@ func _on_prev_player_pressed():
 	Game.prev_player()
 
 func _on_create_pressed():
-	var url = "http://localhost:9090/games/new"
+	var url = Server.get_server() + "/games/new"
 	var headers = ["Content-Type: application/json"]
 	$HTTP_create_game.request(url, headers, false, HTTPClient.METHOD_POST, "")
 
