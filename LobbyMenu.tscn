@@ -50,6 +50,7 @@ text = "Back"
 [node name="HTTP_leave_game" type="HTTPRequest" parent="."]
 
 [node name="refresh_game" type="Timer" parent="."]
+wait_time = 0.25
 autostart = true
 [connection signal="pressed" from="p1" to="." method="_on_ready_pressed"]
 [connection signal="pressed" from="p2" to="." method="_on_ready_pressed"]
