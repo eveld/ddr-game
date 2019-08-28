@@ -18,7 +18,11 @@ func _process(delta):
 		get_tree().reload_current_scene()
 
 func _ready():
-	var data = _read_audio("res://audio.json")
+	var data = _read_audio("res://" + Game.get_song() + ".json")
+	var audio_file = "res://" + data.audio.download_link
+	if File.new().file_exists(audio_file):
+		var sfx = load(audio_file)
+		$music.stream = sfx
 	
 	tempo = data.tempo
 	bar_length = 8
