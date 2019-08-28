@@ -40,6 +40,8 @@ func _process(delta):
 		set_scale(Vector3(1, 1, 1))
 		
 	if is_colliding && is_collecting && !note.is_collected && !is_misstep:
+		print(note.allocation)
+		
 		note.collect()
 		note.hide()
 		Game.increase_score(10)

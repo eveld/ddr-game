@@ -1,13 +1,15 @@
 extends Spatial
 
+var allocation
 var color = Color()
 
 #var is_colliding = false
 var is_collected = false
 #var pad
 
-func setup(bar):
-	color = bar.color
+func setup(bar, id):
+	allocation = id
+	color = Color(bar.color)
 
 func collect():
 	is_collected = true
@@ -33,6 +35,11 @@ func collect():
 	
 func _ready():
 	var material = SpatialMaterial.new()
+	if allocation == null:
+		color = Color(0.75, 0.75, 0.75, 1)
+	else:
+		material.albedo_color = color
+	
 	material.albedo_color = color
 	$mesh.set_surface_material(0, material)
 
