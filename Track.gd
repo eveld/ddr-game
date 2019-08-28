@@ -31,6 +31,13 @@ func _process(delta):
 		var bar_scale = bar_instance.get_child(0).scale.z
 		if bar_instance.get_global_transform().origin.z > 8:
 			var deleted_instance = bar_instances.pop_front()
+			for note in deleted_instance.note_instances:
+				if note.allocation != null:
+					print("deleting allocation" + note.allocation)
+					var url = Game.get_server() + "/allocations/" + note.allocation
+					var headers = ["Content-Type: application/json"]
+					$HTTP_clear_allocation.request(url, headers, false, HTTPClient.METHOD_DELETE, "")
+			
 			deleted_instance.queue_free()
 			
 			if bar_index < len(bars):

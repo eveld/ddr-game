@@ -22,6 +22,9 @@ func _process(_delta):
 	if !game_over:
 		$score_label.text = "%d" % Game.score
 		
+		# Animate the grid...
+		$floor.get_surface_material(0).uv1_offset.z -= 0.05
+		
 		var finished = 0
 		for track_instance in track_instances:
 			if track_instance.finished:

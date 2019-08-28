@@ -1,20 +1,73 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
-[ext_resource path="res://udemyone.ogg" type="AudioStream" id=2]
-[ext_resource path="res://open_sans_64.tres" type="DynamicFont" id=3]
+[ext_resource path="res://grid.png" type="Texture" id=2]
+[ext_resource path="res://udemyone.ogg" type="AudioStream" id=3]
+[ext_resource path="res://open_sans_64.tres" type="DynamicFont" id=4]
+[ext_resource path="res://building_1.obj" type="ArrayMesh" id=5]
+[ext_resource path="res://building_3.obj" type="ArrayMesh" id=6]
+[ext_resource path="res://building_4.obj" type="ArrayMesh" id=7]
+[ext_resource path="res://building_5.obj" type="ArrayMesh" id=8]
+[ext_resource path="res://building_6.obj" type="ArrayMesh" id=9]
+[ext_resource path="res://sun.png" type="Texture" id=10]
+
+[sub_resource type="ProceduralSky" id=2]
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+background_sky = SubResource( 2 )
+background_sky_custom_fov = 35.6
+background_color = Color( 0.0313726, 0.0313726, 0.0313726, 1 )
+ambient_light_color = Color( 1, 1, 1, 1 )
+ambient_light_sky_contribution = 0.0
+
+[sub_resource type="PlaneMesh" id=3]
+size = Vector2( 100, 100 )
+subdivide_width = 100
+subdivide_depth = 100
+
+[sub_resource type="SpatialMaterial" id=13]
+flags_vertex_lighting = true
+albedo_texture = ExtResource( 2 )
+uv1_triplanar = true
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=10]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=9]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="CubeMesh" id=11]
+
+[sub_resource type="SpatialMaterial" id=12]
+albedo_color = Color( 0, 0, 0, 1 )
 
 [node name="Main" type="Spatial"]
 script = ExtResource( 1 )
 
 [node name="camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.965925, 0.258819, 0, -0.258819, 0.965925, 0, 1, 0.5 )
+transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 1, 0.5 )
+environment = SubResource( 1 )
 current = true
 fov = 80.0
 far = 50.0
 
+[node name="floor" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 13 )
+
 [node name="music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
+stream = ExtResource( 3 )
 
 [node name="countdown_timer" type="Timer" parent="."]
 autostart = true
@@ -28,7 +81,7 @@ margin_left = -206.0
 margin_top = -156.0
 margin_right = 206.0
 margin_bottom = 76.0
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 align = 1
 valign = 1
 
@@ -37,7 +90,7 @@ margin_left = 67.8303
 margin_top = 57.2789
 margin_right = 348.83
 margin_bottom = 211.279
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "0"
 
 [node name="gameover_timer" type="Timer" parent="."]
@@ -50,7 +103,73 @@ margin_left = 440.025
 margin_top = 247.039
 margin_right = 822.025
 margin_bottom = 341.039
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 text = "GAME OVER"
+
+[node name="building_1" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1691, 0, -45.6876 )
+material_override = SubResource( 5 )
+mesh = ExtResource( 5 )
+material/0 = null
+
+[node name="building_7" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.66133, 0, -43.8592 )
+material_override = SubResource( 5 )
+mesh = ExtResource( 5 )
+material/0 = null
+
+[node name="building_3" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.88167, 0, -45.5204 )
+material_override = SubResource( 6 )
+mesh = ExtResource( 6 )
+material/0 = null
+material/1 = null
+
+[node name="building_8" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.85392, 0, -45.5204 )
+material_override = SubResource( 6 )
+mesh = ExtResource( 6 )
+material/0 = null
+material/1 = null
+
+[node name="building_4" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.33226, 1.43051e-006, -45.8803 )
+material_override = SubResource( 7 )
+mesh = ExtResource( 7 )
+material/0 = null
+
+[node name="building_5" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.50601, 0, -45.923 )
+material_override = SubResource( 10 )
+mesh = ExtResource( 8 )
+material/0 = null
+
+[node name="building_6" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.88148, 0, -45.9481 )
+material_override = SubResource( 9 )
+mesh = ExtResource( 9 )
+material/0 = null
+
+[node name="building_9" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.3785, 0, -45.9481 )
+material_override = SubResource( 9 )
+mesh = ExtResource( 9 )
+material/0 = null
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 6, 0, 0, 0, 5, 0, 0, 0, 1, 0, 6.6, -49.776 )
+texture = ExtResource( 10 )
+region_enabled = true
+region_rect = Rect2( 15.847, 14.2659, 463.503, 263.561 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 8.704, 0, 0, 0, 1, 0, 0, 0, 1, -11.937, 0.645166, -43.4089 )
+mesh = SubResource( 11 )
+material/0 = SubResource( 12 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 8.704, 0, 0, 0, 1, 0, 0, 0, 1, 13.835, 0.645166, -43.4089 )
+mesh = SubResource( 11 )
+material/0 = SubResource( 12 )
 [connection signal="timeout" from="countdown_timer" to="." method="_on_countdown_timer_timeout"]
 [connection signal="timeout" from="gameover_timer" to="." method="_on_gameover_timer_timeout"]

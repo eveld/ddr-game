@@ -40,8 +40,8 @@ func _ready():
 	else:
 		material.albedo_color = color
 	
-	material.albedo_color = color
-	$mesh.set_surface_material(0, material)
+	# material.albedo_color = color
+	# $mesh.set_surface_material(0, material)
 
 #func _on_area_entered(area):
 #	if area.is_in_group("Pad"):
