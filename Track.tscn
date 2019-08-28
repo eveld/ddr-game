@@ -5,8 +5,6 @@
 [sub_resource type="PlaneMesh" id=1]
 
 [sub_resource type="SpatialMaterial" id=2]
-flags_transparent = true
-albedo_color = Color( 0.784314, 1, 1, 0.0941176 )
 
 [node name="Lane" type="Spatial"]
 script = ExtResource( 1 )
@@ -15,5 +13,3 @@ script = ExtResource( 1 )
 transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, -100 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
-
-[node name="HTTP_clear_allocation" type="HTTPRequest" parent="."]

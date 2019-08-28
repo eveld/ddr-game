@@ -1,6 +1,6 @@
 extends Node
 
-var songs = ["beatstruck", "audio"]
+var songs = ["maidentradesbleeps", "beatstruck", "audio"]
 var players = 1
 var max_players = 2
 
