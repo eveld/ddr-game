@@ -1,6 +1,6 @@
 extends Control
 
-var server = Server.get_server()
+var server = Game.get_server()
 
 func _ready():
 	var file = File.new()
@@ -25,7 +25,7 @@ func _on_HTTP_check_server_request_completed(result, response_code, headers, bod
 	var message = self.get_node("Test_status")
 	if(response_code == 200):
 		message.set_text("Connected to Server")
-		Server.set_server(server)
+		Game.set_server(server)
 	else:
 		message.set_text("Failed to Connect to Server")
 

@@ -13,7 +13,6 @@ margin_left = 212.276
 margin_top = 184.283
 margin_right = 597.276
 margin_bottom = 440.283
-text = "Player one"
 icon = ExtResource( 2 )
 
 [node name="p2" type="Button" parent="."]
@@ -21,7 +20,6 @@ margin_left = 672.984
 margin_top = 183.117
 margin_right = 1057.98
 margin_bottom = 439.117
-text = "Player two"
 icon = ExtResource( 2 )
 
 [node name="start" type="Button" parent="."]

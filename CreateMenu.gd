@@ -1,13 +1,20 @@
 extends Control
 
-func _process(delta):
+func _process(_delta):
 	$song_title.text = Game.get_song()
+
+func _input(event):
+	if event.is_action_pressed("w"):
+		$name_selector.next_character()
+		
+	if event.is_action_pressed("s"):
+		$name_selector.prev_character()
 	
-	var players = Game.get_players()
-	if players == 1:
-		$player_count.text = "1 player"
-	else:
-		$player_count.text = "%d players" % players
+	if event.is_action_pressed("a"):
+		$name_selector.prev_selector()
+		
+	if event.is_action_pressed("d"):
+		$name_selector.next_selector()
 
 func _on_next_song_pressed():
 	Game.next_song()
@@ -15,16 +22,18 @@ func _on_next_song_pressed():
 func _on_prev_song_pressed():
 	Game.prev_song()
 
-func _on_next_player_pressed():
-	Game.next_player()
-
-func _on_prev_player_pressed():
-	Game.prev_player()
-
 func _on_create_pressed():
-	var url = Server.get_server() + "/games/new"
+	var url = Game.get_server() + "/games/new"
 	var headers = ["Content-Type: application/json"]
-	$HTTP_create_game.request(url, headers, false, HTTPClient.METHOD_POST, "")
+	
+	var query = JSON.print({
+		"home_id": $name_selector.get_name(),
+		"song": Game.get_song()
+	})
+	
+	print(query)
+	
+	$HTTP_create_game.request(url, headers, false, HTTPClient.METHOD_POST, query)
 
 func _on_back_pressed():
 	get_tree().change_scene("res://GameMenu.tscn")

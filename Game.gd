@@ -11,6 +11,27 @@ var player_index = 0
 
 var game_id = ""
 var player_id = ""
+var server = ""
+
+func _ready():
+	# Set defaults from config file.
+	var file = File.new()
+	if(!file.file_exists("user://config.cfg")):
+		file.open("user://config.cfg", File.WRITE)
+		file.store_line("[server]")
+		file.store_line("url=\"http://localhost:9090\"")
+		file.close()
+	
+	var config = ConfigFile.new()
+	var err = config.load("user://config.cfg")
+	if err == OK:
+		server = config.get_value("server", "url", "http://localhost:9090")
+
+func set_server(endpoint):
+	server = endpoint
+	
+func get_server():
+	return server
 
 func set_game_id(id):
 	game_id = id

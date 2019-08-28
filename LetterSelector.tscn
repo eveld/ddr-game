@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://LetterSelector.gd" type="Script" id=1]
+[ext_resource path="res://open_sans_64.tres" type="DynamicFont" id=2]
+
+[node name="Control" type="Control"]
+margin_left = 1.0
+margin_right = 82.0
+margin_bottom = 217.0
+script = ExtResource( 1 )
+
+[node name="prev" type="Button" parent="."]
+margin_top = 165.421
+margin_right = 75.0003
+margin_bottom = 216.421
+text = "prev"
+
+[node name="next" type="Button" parent="."]
+margin_right = 74.9999
+margin_bottom = 51.0
+text = "next"
+
+[node name="character" type="Label" parent="."]
+margin_left = 6.46182
+margin_top = 63.3251
+margin_right = 73.4616
+margin_bottom = 151.325
+custom_fonts/font = ExtResource( 2 )
+align = 1
+[connection signal="pressed" from="prev" to="." method="_on_prev_pressed"]
+[connection signal="pressed" from="next" to="." method="_on_next_pressed"]

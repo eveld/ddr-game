@@ -13,6 +13,8 @@ var bars
 var bar_index = 0
 var bar_instances = []
 
+var finished = false
+
 func setup(game, track):
 	speed = game.speed
 	note_scale = game.note_scale
@@ -22,15 +24,19 @@ func setup(game, track):
 	bars = track.bars
 
 func _process(delta):
-#	if get_parent().game_started:
 	for bar_instance in bar_instances:
 		bar_instance.translate(Vector3(0, 0, speed * delta))
 		
 		var bar_size = bar_instance.get_child(0).get_mesh().get_size().y
 		var bar_scale = bar_instance.get_child(0).scale.z
 		if bar_instance.get_global_transform().origin.z > 8:
-			bar_instances.pop_front()
-			_create_bar(bars[bar_index])
+			var deleted_instance = bar_instances.pop_front()
+			deleted_instance.queue_free()
+			
+			if bar_index < len(bars):
+				_create_bar(bars[bar_index])
+			else:
+				finished = true
 
 func _ready():
 	_create_pad()

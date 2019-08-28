@@ -18,7 +18,7 @@ func _ready():
 	var allocation_count = notes.size()
 	if allocation_count > 0:
 		print("requesting %d allocations" % allocation_count)
-		var url = Server.get_server() + "/allocations?player=" + Game.get_player_id() + "&count=" + str(allocation_count)
+		var url = Game.get_server() + "/allocations?player=" + Game.get_player_id() + "&count=" + str(allocation_count)
 		var headers = ["Content-Type: application/json"]
 		$HTTP_get_allocations.request(url, headers, false, HTTPClient.METHOD_GET, "")
 		

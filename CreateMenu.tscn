@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://CreateMenu.gd" type="Script" id=1]
+[ext_resource path="res://NameSelector.tscn" type="PackedScene" id=2]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -9,45 +10,24 @@ script = ExtResource( 1 )
 
 [node name="prev_song" type="Button" parent="."]
 margin_left = 276.371
-margin_top = 194.748
+margin_top = 344.748
 margin_right = 364.371
-margin_bottom = 260.748
+margin_bottom = 410.748
 text = "prev"
 
 [node name="next_song" type="Button" parent="."]
 margin_left = 889.255
-margin_top = 204.772
+margin_top = 354.772
 margin_right = 977.255
-margin_bottom = 270.772
+margin_bottom = 420.772
 text = "next"
-
-[node name="next_player" type="Button" parent="."]
-margin_left = 893.551
-margin_top = 340.81
-margin_right = 981.551
-margin_bottom = 406.81
-text = "next"
-
-[node name="prev_player" type="Button" parent="."]
-margin_left = 282.099
-margin_top = 345.105
-margin_right = 370.099
-margin_bottom = 411.105
-text = "prev"
 
 [node name="song_title" type="Label" parent="."]
 margin_left = 482.575
-margin_top = 197.612
+margin_top = 347.612
 margin_right = 757.575
-margin_bottom = 254.612
+margin_bottom = 404.612
 text = "Song title"
-
-[node name="player_count" type="Label" parent="."]
-margin_left = 478.279
-margin_top = 347.969
-margin_right = 753.279
-margin_bottom = 404.969
-text = "1 player"
 
 [node name="create" type="Button" parent="."]
 margin_left = 409.544
@@ -64,10 +44,14 @@ margin_bottom = 636.061
 text = "Back"
 
 [node name="HTTP_create_game" type="HTTPRequest" parent="."]
+
+[node name="name_selector" parent="." instance=ExtResource( 2 )]
+margin_left = 495.042
+margin_top = 50.7736
+margin_right = -522.958
+margin_bottom = -445.226
 [connection signal="pressed" from="prev_song" to="." method="_on_prev_song_pressed"]
 [connection signal="pressed" from="next_song" to="." method="_on_next_song_pressed"]
-[connection signal="pressed" from="next_player" to="." method="_on_next_player_pressed"]
-[connection signal="pressed" from="prev_player" to="." method="_on_prev_player_pressed"]
 [connection signal="pressed" from="create" to="." method="_on_create_pressed"]
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]
 [connection signal="request_completed" from="HTTP_create_game" to="." method="_on_HTTP_create_game_request_completed"]
