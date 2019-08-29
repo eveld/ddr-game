@@ -1,92 +1,87 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://GameMenu.gd" type="Script" id=1]
-[ext_resource path="res://dance_theme.tres" type="Theme" id=2]
+[ext_resource path="res://dance_theme.tres" type="Theme" id=1]
+[ext_resource path="res://GameMenu.gd" type="Script" id=2]
 [ext_resource path="res://title_bg.png" type="Texture" id=3]
+[ext_resource path="res://cancel_button.png" type="Texture" id=4]
+[ext_resource path="res://select_button.png" type="Texture" id=5]
 
-[node name="Menu" type="Control"]
+[node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 1 )
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
 
-[node name="background" type="PanelContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme = ExtResource( 2 )
-
-[node name="TextureRect" type="TextureRect" parent="background"]
-margin_left = 6.0
-margin_top = 4.0
-margin_right = 1926.0
-margin_bottom = 1084.0
+[node name="bg" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
 texture = ExtResource( 3 )
 
-[node name="vertical" type="VBoxContainer" parent="background"]
-margin_left = 6.0
-margin_top = 4.0
-margin_right = 1926.0
-margin_bottom = 1084.0
-custom_constants/separation = 300
-alignment = 1
-
-[node name="center" type="CenterContainer" parent="background/vertical"]
-margin_top = 352.0
-margin_right = 1920.0
-margin_bottom = 390.0
-
-[node name="options" type="HBoxContainer" parent="background/vertical/center"]
-editor/display_folded = true
-margin_left = 663.0
-margin_right = 1257.0
-margin_bottom = 38.0
+[node name="menu" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
 custom_constants/separation = 100
 
-[node name="create" type="Button" parent="background/vertical/center/options"]
+[node name="center" type="CenterContainer" parent="menu"]
+margin_right = 1920.0
+margin_bottom = 800.0
+rect_min_size = Vector2( 0, 800 )
+
+[node name="options" type="HBoxContainer" parent="menu/center"]
+margin_left = 613.0
+margin_top = 381.0
+margin_right = 1307.0
+margin_bottom = 419.0
+custom_constants/separation = 200
+
+[node name="create" type="Button" parent="menu/center/options"]
 margin_right = 238.0
 margin_bottom = 38.0
-rect_pivot_offset = Vector2( 215.681, 67.3492 )
 text = "Create new game"
 
-[node name="join" type="Button" parent="background/vertical/center/options"]
-margin_left = 338.0
-margin_right = 594.0
+[node name="join" type="Button" parent="menu/center/options"]
+margin_left = 438.0
+margin_right = 694.0
 margin_bottom = 38.0
-rect_pivot_offset = Vector2( 215.681, 67.3492 )
 text = "Join existing game"
 
-[node name="actions" type="HBoxContainer" parent="background/vertical"]
-margin_top = 1000.0
+[node name="actions" type="HBoxContainer" parent="menu"]
+margin_top = 900.0
 margin_right = 1920.0
-margin_bottom = 728.0
-custom_constants/separation = 500
+margin_bottom = 948.0
+custom_constants/separation = 700
 alignment = 1
 
-[node name="cancel" type="HBoxContainer" parent="background/vertical/actions"]
-margin_left = 353.0
-margin_right = 461.0
-margin_bottom = 38.0
+[node name="cancel" type="HBoxContainer" parent="menu/actions"]
+margin_left = 451.0
+margin_right = 611.0
+margin_bottom = 48.0
 
-[node name="button" type="Button" parent="background/vertical/actions/cancel"]
-margin_right = 108.0
-margin_bottom = 38.0
-rect_pivot_offset = Vector2( 215.681, 67.3492 )
+[node name="icon" type="TextureRect" parent="menu/actions/cancel"]
+margin_right = 48.0
+margin_bottom = 48.0
+texture = ExtResource( 4 )
+
+[node name="button" type="Button" parent="menu/actions/cancel"]
+margin_left = 52.0
+margin_right = 160.0
+margin_bottom = 48.0
 text = "Cancel"
 flat = true
 
-[node name="select" type="HBoxContainer" parent="background/vertical/actions"]
-margin_left = 961.0
-margin_right = 961.0
-margin_bottom = 38.0
+[node name="select" type="HBoxContainer" parent="menu/actions"]
+margin_left = 1311.0
+margin_right = 1469.0
+margin_bottom = 48.0
 
-[node name="button" type="Button" parent="background/vertical/actions"]
-margin_left = 1461.0
-margin_right = 1567.0
-margin_bottom = 38.0
-rect_pivot_offset = Vector2( 215.681, 67.3492 )
+[node name="icon" type="TextureRect" parent="menu/actions/select"]
+margin_right = 48.0
+margin_bottom = 48.0
+texture = ExtResource( 5 )
+
+[node name="button" type="Button" parent="menu/actions/select"]
+margin_left = 52.0
+margin_right = 158.0
+margin_bottom = 48.0
 text = "Select"
 flat = true
-align = 0
-[connection signal="pressed" from="background/vertical/center/options/create" to="." method="_on_New_pressed"]
-[connection signal="pressed" from="background/vertical/center/options/join" to="." method="_on_Join_pressed"]
-[connection signal="pressed" from="background/vertical/actions/cancel/button" to="." method="_on_Back_pressed"]
-[connection signal="pressed" from="background/vertical/actions/button" to="." method="_on_Back_pressed"]

@@ -1,13 +1,13 @@
 extends Node
 
-var songs = ["maidentradesbleeps", "beatstruck", "audio"]
 var players = 1
 var max_players = 2
 
 var score = 0
 var is_master = false
-var song_index = 0
 var player_index = 0
+
+var songs = ["maidentradesbleeps", "beatstruck", "audio"]
 
 var game_id = ""
 var player_id = ""
@@ -20,12 +20,15 @@ func _ready():
 		file.open("user://config.cfg", File.WRITE)
 		file.store_line("[server]")
 		file.store_line("url=\"http://localhost:9090\"")
+		file.store_line("[audio]")
+		file.store_line("songs=[\"maidentradesbleeps\", \"beatstruck\", \"audio\"]")
 		file.close()
 	
 	var config = ConfigFile.new()
 	var err = config.load("user://config.cfg")
 	if err == OK:
-		server = config.get_value("server", "url", "http://localhost:9090")
+		server = config.get_value("server", "url")
+		songs = config.get_value("audio", "songs")
 
 func set_server(endpoint):
 	server = endpoint
@@ -60,28 +63,8 @@ func reset_master():
 func is_master():
 	return is_master
 	
-func next_player():
-	players += 1
-	if players > max_players:
-		players = 1
-
-func prev_player():
-	players -= 1
-	if players < 1:
-		players = max_players
-
-func next_song():
-	song_index += 1
-	if song_index > songs.size() -1:
-		song_index = 0
-		
-func prev_song():
-	song_index -= 1
-	if song_index < 0:
-		song_index = songs.size()-1
-	
-func get_song():
-	return songs[song_index]
+func get_songs():
+	return songs
 	
 func get_players():
 	return players

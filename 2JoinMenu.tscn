@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://JoinMenu.gd" type="Script" id=1]
+[ext_resource path="res://open_sans_64.tres" type="DynamicFont" id=2]
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="join" type="Button" parent="."]
+margin_left = 653.932
+margin_top = 626.792
+margin_right = 850.932
+margin_bottom = 681.792
+disabled = true
+text = "Join"
+
+[node name="cancel" type="Button" parent="."]
+margin_left = 391.584
+margin_top = 628.085
+margin_right = 588.583
+margin_bottom = 683.085
+text = "cancel"
+
+[node name="HTTP_get_games" type="HTTPRequest" parent="."]
+
+[node name="HTTP_join_game" type="HTTPRequest" parent="."]
+
+[node name="refresh_games" type="Timer" parent="."]
+autostart = true
+
+[node name="game" type="Label" parent="."]
+margin_left = 21.0
+margin_top = 454.0
+margin_right = 1259.0
+margin_bottom = 566.0
+custom_fonts/font = ExtResource( 2 )
+[connection signal="pressed" from="join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="cancel" to="." method="_on_cancel_pressed"]
+[connection signal="request_completed" from="HTTP_get_games" to="." method="_on_HTTP_get_games_request_completed"]
+[connection signal="request_completed" from="HTTP_join_game" to="." method="_on_HTTP_join_game_request_completed"]
+[connection signal="timeout" from="refresh_games" to="." method="_on_refresh_games_timeout"]

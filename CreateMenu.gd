@@ -1,42 +1,52 @@
 extends Control
 
+var song_index = 0
+var songs = []
+
+func _ready():
+	songs = Game.get_songs()
+
 func _process(_delta):
-	$song_title.text = Game.get_song()
+	$menu/center/options/song.text = get_song()
 
 func _input(event):
-	if event.is_action_pressed("w"):
-		$name_selector.next_character()
-		
-	if event.is_action_pressed("s"):
-		$name_selector.prev_character()
-	
 	if event.is_action_pressed("a"):
-		$name_selector.prev_selector()
+		next_song()
 		
 	if event.is_action_pressed("d"):
-		$name_selector.next_selector()
+		prev_song()
+		
+	if event.is_action_pressed("e"):
+		create_game()
+		
+	if event.is_action_pressed("q"):
+		get_tree().change_scene("res://NameMenu.tscn")
 
-func _on_next_song_pressed():
-	Game.next_song()
+func next_song():
+	song_index += 1
+	if song_index > songs.size() -1:
+		song_index = 0
+		
+func prev_song():
+	song_index -= 1
+	if song_index < 0:
+		song_index = songs.size()-1
+		
+func get_song():
+	return songs[song_index]
 
-func _on_prev_song_pressed():
-	Game.prev_song()
-
-func _on_create_pressed():
+func create_game():
 	var url = Game.get_server() + "/games/new"
 	var headers = ["Content-Type: application/json"]
 	
 	var query = JSON.print({
-		"home_id": $name_selector.get_name(),
-		"song": Game.get_song()
+		"home_id": Game.get_player_id(),
+		"song": get_song()
 	})
 	
 	print(query)
 	
 	$HTTP_create_game.request(url, headers, false, HTTPClient.METHOD_POST, query)
-
-func _on_back_pressed():
-	get_tree().change_scene("res://GameMenu.tscn")
 
 func _on_HTTP_create_game_request_completed( result, response_code, headers, body ):
 	if(response_code == 200):

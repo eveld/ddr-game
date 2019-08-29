@@ -1,0 +1,163 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://dance_theme.tres" type="Theme" id=1]
+[ext_resource path="res://NameMenu.gd" type="Script" id=2]
+[ext_resource path="res://title_bg.png" type="Texture" id=3]
+[ext_resource path="res://up_arrow.png" type="Texture" id=4]
+[ext_resource path="res://name_selector_font.tres" type="DynamicFont" id=5]
+[ext_resource path="res://down_arrow.png" type="Texture" id=6]
+[ext_resource path="res://up_arrow_inactive.png" type="Texture" id=7]
+[ext_resource path="res://down_arrow_inactive.png" type="Texture" id=8]
+[ext_resource path="res://cancel_button.png" type="Texture" id=9]
+[ext_resource path="res://select_button.png" type="Texture" id=10]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="bg" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 3 )
+
+[node name="menu" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 100
+
+[node name="center" type="CenterContainer" parent="menu"]
+margin_right = 1920.0
+margin_bottom = 800.0
+rect_min_size = Vector2( 0, 800 )
+
+[node name="selectors" type="HBoxContainer" parent="menu/center"]
+margin_left = 695.0
+margin_top = 204.0
+margin_right = 1225.0
+margin_bottom = 596.0
+custom_constants/separation = 100
+
+[node name="first" type="VBoxContainer" parent="menu/center/selectors"]
+margin_right = 110.0
+margin_bottom = 392.0
+alignment = 1
+
+[node name="up" type="TextureRect" parent="menu/center/selectors/first"]
+margin_right = 110.0
+margin_bottom = 96.0
+texture = ExtResource( 4 )
+stretch_mode = 4
+
+[node name="character" type="Label" parent="menu/center/selectors/first"]
+margin_top = 100.0
+margin_right = 110.0
+margin_bottom = 292.0
+rect_min_size = Vector2( 110, 0 )
+custom_fonts/font = ExtResource( 5 )
+text = "A"
+align = 1
+
+[node name="down" type="TextureRect" parent="menu/center/selectors/first"]
+margin_top = 296.0
+margin_right = 110.0
+margin_bottom = 392.0
+texture = ExtResource( 6 )
+stretch_mode = 4
+
+[node name="second" type="VBoxContainer" parent="menu/center/selectors"]
+margin_left = 210.0
+margin_right = 320.0
+margin_bottom = 392.0
+
+[node name="up" type="TextureRect" parent="menu/center/selectors/second"]
+margin_right = 110.0
+margin_bottom = 96.0
+texture = ExtResource( 7 )
+stretch_mode = 4
+
+[node name="character" type="Label" parent="menu/center/selectors/second"]
+margin_top = 100.0
+margin_right = 110.0
+margin_bottom = 292.0
+rect_min_size = Vector2( 110, 0 )
+custom_fonts/font = ExtResource( 5 )
+text = "A"
+align = 1
+
+[node name="down" type="TextureRect" parent="menu/center/selectors/second"]
+margin_top = 296.0
+margin_right = 110.0
+margin_bottom = 392.0
+texture = ExtResource( 8 )
+stretch_mode = 4
+
+[node name="third" type="VBoxContainer" parent="menu/center/selectors"]
+margin_left = 420.0
+margin_right = 530.0
+margin_bottom = 392.0
+
+[node name="up" type="TextureRect" parent="menu/center/selectors/third"]
+margin_right = 110.0
+margin_bottom = 96.0
+texture = ExtResource( 7 )
+stretch_mode = 4
+
+[node name="character" type="Label" parent="menu/center/selectors/third"]
+margin_top = 100.0
+margin_right = 110.0
+margin_bottom = 292.0
+rect_min_size = Vector2( 110, 0 )
+custom_fonts/font = ExtResource( 5 )
+text = "A"
+align = 1
+
+[node name="down" type="TextureRect" parent="menu/center/selectors/third"]
+margin_top = 296.0
+margin_right = 110.0
+margin_bottom = 392.0
+texture = ExtResource( 8 )
+stretch_mode = 4
+
+[node name="actions" type="HBoxContainer" parent="menu"]
+editor/display_folded = true
+margin_top = 900.0
+margin_right = 1920.0
+margin_bottom = 948.0
+custom_constants/separation = 700
+alignment = 1
+
+[node name="cancel" type="HBoxContainer" parent="menu/actions"]
+margin_left = 451.0
+margin_right = 611.0
+margin_bottom = 48.0
+
+[node name="icon" type="TextureRect" parent="menu/actions/cancel"]
+margin_right = 48.0
+margin_bottom = 48.0
+texture = ExtResource( 9 )
+
+[node name="button" type="Button" parent="menu/actions/cancel"]
+margin_left = 52.0
+margin_right = 160.0
+margin_bottom = 48.0
+text = "Cancel"
+flat = true
+
+[node name="select" type="HBoxContainer" parent="menu/actions"]
+margin_left = 1311.0
+margin_right = 1469.0
+margin_bottom = 48.0
+
+[node name="icon" type="TextureRect" parent="menu/actions/select"]
+margin_right = 48.0
+margin_bottom = 48.0
+texture = ExtResource( 10 )
+
+[node name="button" type="Button" parent="menu/actions/select"]
+margin_left = 52.0
+margin_right = 158.0
+margin_bottom = 48.0
+text = "Select"
+flat = true

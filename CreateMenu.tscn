@@ -1,57 +1,107 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://CreateMenu.gd" type="Script" id=1]
-[ext_resource path="res://NameSelector.tscn" type="PackedScene" id=2]
+[ext_resource path="res://dance_theme.tres" type="Theme" id=1]
+[ext_resource path="res://CreateMenu.gd" type="Script" id=2]
+[ext_resource path="res://title_bg.png" type="Texture" id=3]
+[ext_resource path="res://left_arrow.png" type="Texture" id=4]
+[ext_resource path="res://fonts/ThaleahFat.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://right_arrow.png" type="Texture" id=6]
+[ext_resource path="res://cancel_button.png" type="Texture" id=7]
+[ext_resource path="res://select_button.png" type="Texture" id=8]
 
-[node name="Menu" type="Control"]
+[sub_resource type="DynamicFont" id=1]
+size = 64
+font_data = ExtResource( 5 )
+
+[node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 1 )
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
 
-[node name="prev_song" type="Button" parent="."]
-margin_left = 276.371
-margin_top = 344.748
-margin_right = 364.371
-margin_bottom = 410.748
-text = "prev"
+[node name="bg" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 3 )
 
-[node name="next_song" type="Button" parent="."]
-margin_left = 889.255
-margin_top = 354.772
-margin_right = 977.255
-margin_bottom = 420.772
-text = "next"
+[node name="menu" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 100
 
-[node name="song_title" type="Label" parent="."]
-margin_left = 482.575
-margin_top = 347.612
-margin_right = 757.575
-margin_bottom = 404.612
-text = "Song title"
+[node name="center" type="CenterContainer" parent="menu"]
+margin_right = 1920.0
+margin_bottom = 800.0
+rect_min_size = Vector2( 0, 800 )
 
-[node name="create" type="Button" parent="."]
-margin_left = 409.544
-margin_top = 472.551
-margin_right = 874.544
-margin_bottom = 541.551
-text = "Create game"
+[node name="options" type="HBoxContainer" parent="menu/center"]
+margin_left = 314.0
+margin_top = 352.0
+margin_right = 1606.0
+margin_bottom = 448.0
+custom_constants/separation = 50
 
-[node name="back" type="Button" parent="."]
-margin_left = 405.248
-margin_top = 567.061
-margin_right = 870.248
-margin_bottom = 636.061
-text = "Back"
+[node name="left" type="TextureRect" parent="menu/center/options"]
+margin_right = 96.0
+margin_bottom = 96.0
+texture = ExtResource( 4 )
+
+[node name="game" type="Label" parent="menu/center/options"]
+margin_left = 146.0
+margin_top = 14.0
+margin_right = 1146.0
+margin_bottom = 81.0
+rect_min_size = Vector2( 1000, 0 )
+custom_fonts/font = SubResource( 1 )
+text = "game placeholder"
+align = 1
+
+[node name="right" type="TextureRect" parent="menu/center/options"]
+margin_left = 1196.0
+margin_right = 1292.0
+margin_bottom = 96.0
+texture = ExtResource( 6 )
+
+[node name="actions" type="HBoxContainer" parent="menu"]
+margin_top = 900.0
+margin_right = 1920.0
+margin_bottom = 948.0
+custom_constants/separation = 700
+alignment = 1
+
+[node name="cancel" type="HBoxContainer" parent="menu/actions"]
+margin_left = 451.0
+margin_right = 611.0
+margin_bottom = 48.0
+
+[node name="icon" type="TextureRect" parent="menu/actions/cancel"]
+margin_right = 48.0
+margin_bottom = 48.0
+texture = ExtResource( 7 )
+
+[node name="button" type="Button" parent="menu/actions/cancel"]
+margin_left = 52.0
+margin_right = 160.0
+margin_bottom = 48.0
+text = "Cancel"
+flat = true
+
+[node name="select" type="HBoxContainer" parent="menu/actions"]
+margin_left = 1311.0
+margin_right = 1469.0
+margin_bottom = 48.0
+
+[node name="icon" type="TextureRect" parent="menu/actions/select"]
+margin_right = 48.0
+margin_bottom = 48.0
+texture = ExtResource( 8 )
+
+[node name="button" type="Button" parent="menu/actions/select"]
+margin_left = 52.0
+margin_right = 158.0
+margin_bottom = 48.0
+text = "Select"
+flat = true
 
 [node name="HTTP_create_game" type="HTTPRequest" parent="."]
-
-[node name="name_selector" parent="." instance=ExtResource( 2 )]
-margin_left = 495.042
-margin_top = 50.7736
-margin_right = -522.958
-margin_bottom = -445.226
-[connection signal="pressed" from="prev_song" to="." method="_on_prev_song_pressed"]
-[connection signal="pressed" from="next_song" to="." method="_on_next_song_pressed"]
-[connection signal="pressed" from="create" to="." method="_on_create_pressed"]
-[connection signal="pressed" from="back" to="." method="_on_back_pressed"]
 [connection signal="request_completed" from="HTTP_create_game" to="." method="_on_HTTP_create_game_request_completed"]

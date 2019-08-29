@@ -1,6 +1,7 @@
 extends Control
 
-var selected_game_id = ""
+var game_index = 0
+var games = []
 
 func _ready():
 	var url = Game.get_server() + "/games"
@@ -8,51 +9,53 @@ func _ready():
 	$HTTP_get_games.request(url, headers, false, HTTPClient.METHOD_GET, "")
 
 func _process(delta):
-	$game.text = selected_game_id
+	if games.size() > 0:
+		$menu/center/options/game.text = get_game().home_id
 
 func _input(event):
-	if event.is_action_pressed("w"):
-		$name_selector.next_character()
-		
-	if event.is_action_pressed("s"):
-		$name_selector.prev_character()
-	
 	if event.is_action_pressed("a"):
-		$name_selector.prev_selector()
+		next_game()
 		
 	if event.is_action_pressed("d"):
-		$name_selector.next_selector()
+		prev_game()
+		
+	if event.is_action_pressed("e"):
+		join_game()
+		
+	if event.is_action_pressed("q"):
+		get_tree().change_scene("res://GameMenu.tscn")
 
 func _on_HTTP_get_games_request_completed(result, response_code, headers, body):
 	if(response_code == 200):
 		var response = JSON.parse(body.get_string_from_utf8()).result
-		selected_game_id = ""
 		for game in response:
 			if (game.started == 0 && game.away_id == "" && game.home_id != ""):
-				selected_game_id = game.id
-				break
-				
-		if selected_game_id != "":
-			$join.disabled = false
-			
+				games.append(game)
+
+func next_game():
+	game_index += 1
+	if game_index > games.size() -1:
+		game_index = 0
+		
+func prev_game():
+	game_index -= 1
+	if game_index < 0:
+		game_index = games.size()-1
+
+func get_game():
+	return games[game_index]
 
 func _on_refresh_games_timeout():
 	var url = Game.get_server() + "/games"
 	var headers = ["Content-Type: application/json"]
 	$HTTP_get_games.request(url, headers, false, HTTPClient.METHOD_GET, "")
 
-func _on_cancel_pressed():
-	get_tree().change_scene("res://GameMenu.tscn")
-
-#
-# Join game
-#
-func _on_join_pressed():
-	var url = Game.get_server() + "/games/" + selected_game_id + "/join"
+func join_game():
+	var url = Game.get_server() + "/games/" + get_game().id + "/join"
 	var headers = ["Content-Type: application/json"]
 	
 	var query = JSON.print({
-		"away_id": $name_selector.get_name()
+		"away_id": Game.get_player_id()
 	})
 	
 	print(query)

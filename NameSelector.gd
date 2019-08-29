@@ -26,4 +26,6 @@ func next_character():
 	selectors[active_selector].next_character()
 	
 func prev_character():
-	selectors[active_selector].prev_character()
+	index -= 1
+	if index < 0:
+		index = len(characters)-1
