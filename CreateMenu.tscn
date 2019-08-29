@@ -46,7 +46,7 @@ margin_right = 96.0
 margin_bottom = 96.0
 texture = ExtResource( 4 )
 
-[node name="game" type="Label" parent="menu/center/options"]
+[node name="song" type="Label" parent="menu/center/options"]
 margin_left = 146.0
 margin_top = 14.0
 margin_right = 1146.0

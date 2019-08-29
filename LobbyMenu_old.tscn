@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://LobbyMenu.gd" type="Script" id=1]
+[ext_resource path="res://waiting.png" type="Texture" id=2]
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="p1" type="Button" parent="."]
+margin_left = 212.276
+margin_top = 184.283
+margin_right = 597.276
+margin_bottom = 440.283
+icon = ExtResource( 2 )
+
+[node name="p2" type="Button" parent="."]
+margin_left = 672.984
+margin_top = 183.117
+margin_right = 1057.98
+margin_bottom = 439.117
+icon = ExtResource( 2 )
+
+[node name="start" type="Button" parent="."]
+margin_left = 453.726
+margin_top = 473.801
+margin_right = 838.726
+margin_bottom = 537.801
+rect_pivot_offset = Vector2( 266.274, 76.199 )
+disabled = true
+text = "Start"
+
+[node name="back" type="Button" parent="."]
+margin_left = 453.726
+margin_top = 563.801
+margin_right = 838.726
+margin_bottom = 627.801
+rect_pivot_offset = Vector2( 266.274, 76.199 )
+text = "Back"
+
+[node name="HTTP_get_game" type="HTTPRequest" parent="."]
+
+[node name="HTTP_player_ready" type="HTTPRequest" parent="."]
+
+[node name="HTTP_start_game" type="HTTPRequest" parent="."]
+
+[node name="HTTP_leave_game" type="HTTPRequest" parent="."]
+
+[node name="refresh_game" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+[connection signal="pressed" from="p1" to="." method="_on_ready_pressed"]
+[connection signal="pressed" from="p2" to="." method="_on_ready_pressed"]
+[connection signal="pressed" from="start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]
+[connection signal="request_completed" from="HTTP_get_game" to="." method="_on_HTTP_get_game_request_completed"]
+[connection signal="request_completed" from="HTTP_player_ready" to="." method="_on_HTTP_player_ready_request_completed"]
+[connection signal="request_completed" from="HTTP_start_game" to="." method="_on_HTTP_start_game_request_completed"]
+[connection signal="request_completed" from="HTTP_leave_game" to="." method="_on_HTTP_leave_game_request_completed"]
+[connection signal="timeout" from="refresh_game" to="." method="_on_refresh_game_timeout"]
