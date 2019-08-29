@@ -21,7 +21,11 @@ func setup(game, track):
 	start_pos = game.start_pos
 	color = track.color
 	controls = track.controls
-	bars = track.bars
+	var offset = []
+	var note_offset = ceil(game.tempo/60)
+	for i in range(note_offset):
+		offset.append({"notes": []})
+	bars = offset + track.bars
 
 func _process(delta):
 	for bar_instance in bar_instances:
