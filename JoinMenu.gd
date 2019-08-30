@@ -51,7 +51,7 @@ func _on_refresh_games_timeout():
 	$HTTP_get_games.request(url, headers, false, HTTPClient.METHOD_GET, "")
 
 func join_game():
-	var url = Game.get_server() + "/games/" + get_game().id + "/join"
+	var url = Game.get_server() + "/games/" + get_game().id + "/join?player=" + Game.get_player_id()
 	var headers = ["Content-Type: application/json"]
 	
 	var query = JSON.print({

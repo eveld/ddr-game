@@ -37,7 +37,7 @@ func get_song():
 	return songs[song_index]
 
 func create_game():
-	var url = Game.get_server() + "/games/new"
+	var url = Game.get_server() + "/games/new?player=" + Game.get_player_id() 
 	var headers = ["Content-Type: application/json"]
 	
 	var query = JSON.print({
