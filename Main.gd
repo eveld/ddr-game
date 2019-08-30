@@ -24,15 +24,13 @@ func _process(_delta):
 		
 		# Animate the grid...
 		$floor.get_surface_material(0).uv1_offset.z -= 0.05
-		
-		var finished = 0
-		for track_instance in track_instances:
-			if track_instance.finished:
-				finished += 1
-		if finished == track_count:
-			game_over = true
-			$gameover_label.show()
-			$gameover_timer.start()
+#
+#		var finished = 0
+#		for track_instance in track_instances:
+#			if track_instance.finished:
+#				finished += 1
+#		if finished == track_count:
+			
 
 func _ready():
 	var data = _read_audio("res://" + Game.get_song() + ".json")
@@ -97,5 +95,12 @@ func _read_audio(path):
 		
 	return parsed.result
 
+func _on_music_finished():
+	print("finished")
+	game_over = true
+	$gameover_label.show()
+	$gameover_timer.start()
+
 func _on_gameover_timer_timeout():
-	get_tree().change_scene("res://GameMenu.tscn")
+	get_tree().change_scene("res://Highscores.tscn")
+

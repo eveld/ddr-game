@@ -2,12 +2,13 @@ extends Control
 
 var home_ready = false
 var away_ready = false
+var all_ready = false
 
 var home_id = ""
 var away_id = ""
 
 func _process(delta):
-	if home_ready && away_ready:
+	if all_ready:
 		start_game()
 		
 	if home_ready:
@@ -44,6 +45,14 @@ func _on_HTTP_get_game_request_completed(result, response_code, headers, body):
 		
 		away_id = response.away_id
 		away_ready = response.away_ready
+		
+		all_ready = false
+		if home_id != "" && home_ready:
+			if away_id == "":
+				all_ready = true
+			else:
+				if away_ready:
+					all_ready = true
 
 func player_ready():
 	var url = Game.get_server() + "/games/" + Game.get_game_id() + "/ready?player=" + Game.get_player_id()

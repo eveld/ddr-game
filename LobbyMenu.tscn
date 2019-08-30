@@ -29,18 +29,18 @@ rect_min_size = Vector2( 0, 300 )
 alignment = 1
 
 [node name="title" type="Label" parent="menu/header"]
-margin_top = 95.0
+margin_top = 103.0
 margin_right = 1920.0
-margin_bottom = 162.0
+margin_bottom = 155.0
 custom_fonts/font = ExtResource( 4 )
 text = "Game lobby"
 align = 1
 valign = 1
 
 [node name="subtitle" type="Label" parent="menu/header"]
-margin_top = 166.0
+margin_top = 159.0
 margin_right = 1920.0
-margin_bottom = 204.0
+margin_bottom = 197.0
 text = "The game will start when all players are ready"
 align = 1
 valign = 1
@@ -138,16 +138,19 @@ margin_bottom = 300.0
 text = "Ready"
 flat = true
 
-[node name="HTTP_get_game" type="HTTPRequest" parent="."]
-
 [node name="HTTP_player_ready" type="HTTPRequest" parent="."]
 
 [node name="HTTP_leave_game" type="HTTPRequest" parent="."]
 
+[node name="HTTP_start_game" type="HTTPRequest" parent="."]
+
 [node name="refresh_game" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
-[connection signal="request_completed" from="HTTP_get_game" to="." method="_on_HTTP_get_game_request_completed"]
+
+[node name="HTTP_get_game" type="HTTPRequest" parent="."]
 [connection signal="request_completed" from="HTTP_player_ready" to="." method="_on_HTTP_player_ready_request_completed"]
 [connection signal="request_completed" from="HTTP_leave_game" to="." method="_on_HTTP_leave_game_request_completed"]
+[connection signal="request_completed" from="HTTP_start_game" to="." method="_on_HTTP_start_game_request_completed"]
 [connection signal="timeout" from="refresh_game" to="." method="_on_refresh_game_timeout"]
+[connection signal="request_completed" from="HTTP_get_game" to="." method="_on_HTTP_get_game_request_completed"]

@@ -27,11 +27,16 @@ func collect():
 	if is_instance_valid(note) && !note.is_collected:
 		note.collect()
 		
-#		print(note.allocation)
+		# Award bonus points for non-existent allocations.
+		if note.allocation:
+			Game.increase_score(10)
+			
+			# Kill the allocation
+		else:
+			Game.increase_score(50)
 		
 		note.hide()
 		note = null
-		Game.increase_score(10)
 	else:
 		Game.decrease_score(5)
 	

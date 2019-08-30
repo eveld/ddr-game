@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Note.gd" type="Script" id=1]
-[ext_resource path="res://font_menu_title.tres" type="DynamicFont" id=2]
+[ext_resource path="res://font_note.tres" type="DynamicFont" id=2]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -50,7 +50,7 @@ mesh = SubResource( 1 )
 material/0 = null
 
 [node name="quad" type="MeshInstance" parent="mesh"]
-transform = Transform( 2, 0, 0, 0, 0.75, 0, 0, 0, 5, 0, 1.6411, 0.0447323 )
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 5, 0, 1.74135, 0.0447323 )
 cast_shadow = 0
 mesh = SubResource( 4 )
 material/0 = null

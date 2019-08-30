@@ -38,18 +38,18 @@ rect_min_size = Vector2( 0, 300 )
 alignment = 1
 
 [node name="title" type="Label" parent="menu/header"]
-margin_top = 90.0
+margin_top = 98.0
 margin_right = 1920.0
-margin_bottom = 157.0
+margin_bottom = 150.0
 custom_fonts/font = ExtResource( 4 )
 text = "Choose the song for your game"
 align = 1
 valign = 1
 
 [node name="subtitle" type="HBoxContainer" parent="menu/header"]
-margin_top = 161.0
+margin_top = 154.0
 margin_right = 1920.0
-margin_bottom = 209.0
+margin_bottom = 202.0
 alignment = 1
 
 [node name="use" type="Label" parent="menu/header/subtitle"]

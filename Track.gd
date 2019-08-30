@@ -31,8 +31,6 @@ func _process(delta):
 	for bar_instance in bar_instances:
 		bar_instance.translate(Vector3(0, 0, speed * delta))
 		
-#		var bar_size = bar_instance.get_child(0).get_mesh().get_size().y
-#		var bar_scale = bar_instance.get_child(0).scale.z
 		if bar_instance.get_global_transform().origin.z > 8:
 			var deleted_instance = bar_instances.pop_front()
 			for note in deleted_instance.note_instances:
@@ -52,7 +50,7 @@ func _process(delta):
 func _ready():
 	_create_pad()
 	
-	# Create the initial bars
+	# Create the initial 3 bars
 	for i in range(0, 3):
 		_create_bar(bars[i])
 	

@@ -23,4 +23,3 @@ priority = 5.0
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0 )
 shape = SubResource( 3 )
 [connection signal="area_entered" from="area" to="." method="_on_area_entered"]
-[connection signal="area_exited" from="area" to="." method="_on_area_exited"]
