@@ -28,7 +28,7 @@ func _on_HTTP_get_allocations_request_completed(result, response_code, headers, 
 		for note in notes:
 			var note_instance = note_scene.instance()
 			note_instance.setup(self, allocations.pop_front())
-			note_instance.translate(Vector3(0, 0.5, -note.pos * note_scale))
+			note_instance.translate(Vector3(0, 0.3, -note.pos * note_scale))
 			add_child(note_instance)
 			
 			note_instances.append(note_instance)

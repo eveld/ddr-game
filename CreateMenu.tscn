@@ -19,13 +19,19 @@ font_data = ExtResource( 8 )
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="bg" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
+rect_min_size = Vector2( 1920, 1080 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture = ExtResource( 3 )
+expand = true
 
 [node name="menu" type="VBoxContainer" parent="."]
 anchor_right = 1.0
@@ -38,18 +44,18 @@ rect_min_size = Vector2( 0, 300 )
 alignment = 1
 
 [node name="title" type="Label" parent="menu/header"]
-margin_top = 98.0
+margin_top = 76.0
 margin_right = 1920.0
-margin_bottom = 150.0
+margin_bottom = 172.0
 custom_fonts/font = ExtResource( 4 )
 text = "Choose the song for your game"
 align = 1
 valign = 1
 
 [node name="subtitle" type="HBoxContainer" parent="menu/header"]
-margin_top = 154.0
+margin_top = 176.0
 margin_right = 1920.0
-margin_bottom = 202.0
+margin_bottom = 224.0
 alignment = 1
 
 [node name="use" type="Label" parent="menu/header/subtitle"]
