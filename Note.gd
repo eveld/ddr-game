@@ -14,13 +14,12 @@ func collect():
 	is_collected = true
 	
 func _ready():
-	if allocation == null:
+	if allocation != null:
 		var colored = SpatialMaterial.new()
 		colored.albedo_color = color
 		material = colored
-#		material = load("res://note.material")
 		
-#		$label/node/id.text = allocation
+		$label/node/id.text = allocation
 		
 	$mesh.set_surface_material(0, material)
 	
