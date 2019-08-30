@@ -53,14 +53,26 @@ valign = 1
 [node name="options" type="HBoxContainer" parent="menu"]
 margin_top = 304.0
 margin_right = 1920.0
-margin_bottom = 704.0
+margin_bottom = 776.0
 rect_min_size = Vector2( 0, 400 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_constants/separation = 200
+alignment = 1
+
+[node name="scores" type="Label" parent="menu/options"]
+margin_left = 955.0
+margin_top = 217.0
+margin_right = 964.0
+margin_bottom = 255.0
+align = 1
+valign = 1
+autowrap = true
 
 [node name="actions" type="HBoxContainer" parent="menu"]
-margin_top = 708.0
+margin_top = 780.0
 margin_right = 1920.0
-margin_bottom = 1008.0
+margin_bottom = 1080.0
 rect_min_size = Vector2( 0, 300 )
 custom_constants/separation = 700
 alignment = 1
@@ -82,3 +94,7 @@ margin_right = 128.0
 margin_bottom = 300.0
 text = "Back"
 flat = true
+
+[node name="HTTPRequest_high_scores" type="HTTPRequest" parent="."]
+[connection signal="ready" from="menu/options" to="." method="_on_options_ready"]
+[connection signal="request_completed" from="HTTPRequest_high_scores" to="." method="_on_HTTPRequest_high_scores_request_completed"]
