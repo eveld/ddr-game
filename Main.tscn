@@ -116,6 +116,9 @@ material/0 = null
 transform = Transform( -0.990246, -0.114562, 0.0793036, 0, 0.569168, 0.822221, -0.139332, 0.814201, -0.563616, 0, 15.8394, -23.0614 )
 shadow_enabled = true
 directional_shadow_mode = 0
+
+[node name="HTTPRequest_leave_game" type="HTTPRequest" parent="."]
 [connection signal="finished" from="music" to="." method="_on_music_finished"]
 [connection signal="timeout" from="countdown_timer" to="." method="_on_countdown_timer_timeout"]
 [connection signal="timeout" from="gameover_timer" to="." method="_on_gameover_timer_timeout"]
+[connection signal="request_completed" from="HTTPRequest_leave_game" to="." method="_on_HTTPRequest_leave_game_request_completed"]
