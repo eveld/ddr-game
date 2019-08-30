@@ -29,7 +29,7 @@ func _ready():
 	var err = config.load("user://config.cfg")
 	if err == OK:
 		server = config.get_value("server", "url")
-		songs = config.get_value("audio", "songs")
+		#songs = config.get_value("audio", "songs")
 
 func set_server(endpoint):
 	server = endpoint
