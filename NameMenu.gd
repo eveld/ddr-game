@@ -6,7 +6,7 @@ var characters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P
 var selectors = [0, 0, 0]
 
 func _process(delta):
-	var controls = $menu/center/selectors.get_children()
+	var controls = $menu/selectors.get_children()
 	var index = 0
 	for control in controls:
 		if index == active_selector:
