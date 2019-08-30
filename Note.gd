@@ -2,10 +2,9 @@ extends Spatial
 
 var allocation
 var color = Color()
+var material = load("res://note_null.material")
 
-#var is_colliding = false
 var is_collected = false
-#var pad
 
 func setup(bar, id):
 	allocation = id
@@ -13,41 +12,15 @@ func setup(bar, id):
 
 func collect():
 	is_collected = true
-
-#func _process(delta):
-#	if is_collected:
-#		hide()
-#	if is_colliding && pad.is_collecting:
-#		var note_pos = get_node("Area").get_pos()
-#		var pad_pos = pad.get_pos()
-		
-#		var distance = note_pos.distance_to(pad_pos)
-#		print(distance)
-#		if !is_collected:
-#			Game.increase_score(10)
-			
-#		is_collected = true
-#		hide()
-	
-#		Game.decrease_score(1)
-		
-		
 	
 func _ready():
-	var material = SpatialMaterial.new()
 	if allocation == null:
-		color = Color(0.75, 0.75, 0.75, 1)
-	else:
-		material.albedo_color = color
+		var colored = SpatialMaterial.new()
+		colored.albedo_color = color
+		material = colored
+#		material = load("res://note.material")
+		
+#		$label/node/id.text = allocation
+		
+	$mesh.set_surface_material(0, material)
 	
-	# material.albedo_color = color
-	# $mesh.set_surface_material(0, material)
-
-#func _on_area_entered(area):
-#	if area.is_in_group("Pad"):
-#		is_colliding = true
-#		pad = area.get_parent()
-#
-#func _on_area_exited(area):
-#	if area.is_in_group("Pad"):
-#		is_colliding = false

@@ -17,6 +17,7 @@ func _input(event):
 		prev_song()
 		
 	if event.is_action_pressed("e"):
+		Game.set_song(song_index)
 		create_game()
 		
 	if event.is_action_pressed("q"):

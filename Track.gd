@@ -31,8 +31,8 @@ func _process(delta):
 	for bar_instance in bar_instances:
 		bar_instance.translate(Vector3(0, 0, speed * delta))
 		
-		var bar_size = bar_instance.get_child(0).get_mesh().get_size().y
-		var bar_scale = bar_instance.get_child(0).scale.z
+#		var bar_size = bar_instance.get_child(0).get_mesh().get_size().y
+#		var bar_scale = bar_instance.get_child(0).scale.z
 		if bar_instance.get_global_transform().origin.z > 8:
 			var deleted_instance = bar_instances.pop_front()
 			for note in deleted_instance.note_instances:

@@ -7,6 +7,7 @@ var score = 0
 var is_master = false
 var player_index = 0
 
+var song_index = 0
 var songs = ["maidentradesbleeps", "beatstruck", "audio"]
 
 var game_id = ""
@@ -62,7 +63,13 @@ func reset_master():
 	
 func is_master():
 	return is_master
-	
+
+func set_song(index):
+	song_index = index
+
+func get_song():
+	return songs[song_index]
+
 func get_songs():
 	return songs
 	
