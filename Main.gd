@@ -8,6 +8,7 @@ var quarter_time
 var speed
 var note_scale
 var start_pos
+var offset
 
 var countdown = 3
 var track_count = 0
@@ -41,6 +42,7 @@ func _ready():
 	
 	track_count = data.tracks.size()
 	tempo = data.tempo
+	offset = data.offset
 	bar_length = 8
 	quarter_time = 60 / float(tempo)
 	speed = bar_length / float(4 * quarter_time)

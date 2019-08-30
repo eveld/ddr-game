@@ -22,8 +22,7 @@ func setup(game, track):
 	color = track.color
 	controls = track.controls
 	var offset = []
-	var note_offset = ceil(game.tempo/60)
-	for i in range(note_offset):
+	for i in range(game.offset):
 		offset.append({"notes": []})
 	bars = offset + track.bars
 
