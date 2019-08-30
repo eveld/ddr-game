@@ -32,6 +32,9 @@ func collect():
 			Game.increase_score(10)
 			
 			# Kill the allocation
+			var url = Game.get_server() + "/allocations" + note.allocation + "/stop"
+			var headers = ["Content-Type: application/json"]
+			$HTTP_stop_allocation.request(url, headers, false, HTTPClient.METHOD_POST, "")
 		else:
 			Game.increase_score(50)
 		
@@ -46,3 +49,8 @@ func release():
 func _on_area_entered(area):
 	if area.is_in_group("note"):
 		note = area.get_parent()
+
+func _on_HTTP_stop_allocation_request_completed(result, response_code, headers, body):
+	if(response_code == 200):
+		var id = JSON.parse(body.get_string_from_utf8()).result
+		print("stopped " + id)

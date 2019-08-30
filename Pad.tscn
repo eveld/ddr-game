@@ -22,4 +22,7 @@ priority = 5.0
 [node name="collision" type="CollisionShape" parent="area"]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0 )
 shape = SubResource( 3 )
+
+[node name="HTTP_stop_allocation" type="HTTPRequest" parent="."]
 [connection signal="area_entered" from="area" to="." method="_on_area_entered"]
+[connection signal="request_completed" from="HTTP_stop_allocation" to="." method="_on_HTTP_stop_allocation_request_completed"]
