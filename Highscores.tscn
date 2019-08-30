@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://dance_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Highscores.gd" type="Script" id=2]
+[ext_resource path="res://title_bg.png" type="Texture" id=3]
+[ext_resource path="res://font_menu_title.tres" type="DynamicFont" id=4]
+[ext_resource path="res://cancel_button.png" type="Texture" id=5]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="bg" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 3 )
+
+[node name="menu" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="header" type="VBoxContainer" parent="menu"]
+margin_right = 1920.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 0, 300 )
+alignment = 1
+
+[node name="title" type="Label" parent="menu/header"]
+margin_top = 95.0
+margin_right = 1920.0
+margin_bottom = 162.0
+custom_fonts/font = ExtResource( 4 )
+text = "highscores"
+align = 1
+valign = 1
+
+[node name="subtitle" type="Label" parent="menu/header"]
+margin_top = 166.0
+margin_right = 1920.0
+margin_bottom = 204.0
+text = "These people have got some epic moves"
+align = 1
+valign = 1
+
+[node name="options" type="HBoxContainer" parent="menu"]
+margin_top = 304.0
+margin_right = 1920.0
+margin_bottom = 704.0
+rect_min_size = Vector2( 0, 400 )
+custom_constants/separation = 200
+
+[node name="actions" type="HBoxContainer" parent="menu"]
+margin_top = 708.0
+margin_right = 1920.0
+margin_bottom = 1008.0
+rect_min_size = Vector2( 0, 300 )
+custom_constants/separation = 700
+alignment = 1
+
+[node name="cancel" type="HBoxContainer" parent="menu/actions"]
+margin_left = 896.0
+margin_right = 1024.0
+margin_bottom = 300.0
+
+[node name="icon" type="TextureRect" parent="menu/actions/cancel"]
+margin_right = 48.0
+margin_bottom = 300.0
+texture = ExtResource( 5 )
+stretch_mode = 4
+
+[node name="button" type="Button" parent="menu/actions/cancel"]
+margin_left = 52.0
+margin_right = 128.0
+margin_bottom = 300.0
+text = "Back"
+flat = true

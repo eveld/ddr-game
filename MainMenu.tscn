@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://dance_theme.tres" type="Theme" id=1]
 [ext_resource path="res://MainMenu.gd" type="Script" id=2]
 [ext_resource path="res://title_bg.png" type="Texture" id=3]
 [ext_resource path="res://dance_logo.png" type="Texture" id=4]
-[ext_resource path="res://select_button.png" type="Texture" id=5]
+[ext_resource path="res://cancel_button.png" type="Texture" id=5]
+[ext_resource path="res://select_button.png" type="Texture" id=6]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -26,41 +27,74 @@ margin_bottom = 1084.0
 
 [node name="middle" type="VBoxContainer" parent="CenterContainer"]
 margin_left = 620.0
-margin_top = 294.0
+margin_top = 206.0
 margin_right = 1300.0
-margin_bottom = 786.0
-custom_constants/separation = 75
+margin_bottom = 874.0
 alignment = 1
 
 [node name="image" type="TextureRect" parent="CenterContainer/middle"]
 margin_right = 680.0
-margin_bottom = 256.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 0, 400 )
 texture = ExtResource( 4 )
+stretch_mode = 4
 
-[node name="center" type="HBoxContainer" parent="CenterContainer/middle"]
-margin_top = 331.0
+[node name="actions" type="HBoxContainer" parent="CenterContainer/middle"]
+margin_top = 404.0
 margin_right = 680.0
-margin_bottom = 379.0
+margin_bottom = 464.0
+custom_constants/separation = 100
 alignment = 1
 
-[node name="button" type="TextureRect" parent="CenterContainer/middle/center"]
-margin_left = 212.0
-margin_right = 260.0
-margin_bottom = 48.0
-texture = ExtResource( 5 )
+[node name="highscores" type="HBoxContainer" parent="CenterContainer/middle/actions"]
+margin_left = 23.0
+margin_right = 301.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
+alignment = 1
 
-[node name="play" type="Button" parent="CenterContainer/middle/center"]
-margin_left = 264.0
-margin_right = 468.0
-margin_bottom = 48.0
+[node name="icon" type="TextureRect" parent="CenterContainer/middle/actions/highscores"]
+margin_right = 48.0
+margin_bottom = 60.0
+texture = ExtResource( 5 )
+stretch_mode = 4
+
+[node name="button" type="Button" parent="CenterContainer/middle/actions/highscores"]
+margin_left = 52.0
+margin_right = 278.0
+margin_bottom = 60.0
+shortcut_in_tooltip = false
+text = "view highscores"
+flat = true
+
+[node name="play" type="HBoxContainer" parent="CenterContainer/middle/actions"]
+margin_left = 401.0
+margin_right = 657.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
+alignment = 1
+
+[node name="icon" type="TextureRect" parent="CenterContainer/middle/actions/play"]
+margin_right = 48.0
+margin_bottom = 60.0
+texture = ExtResource( 6 )
+stretch_mode = 4
+
+[node name="button" type="Button" parent="CenterContainer/middle/actions/play"]
+margin_left = 52.0
+margin_right = 256.0
+margin_bottom = 60.0
 shortcut_in_tooltip = false
 text = "Press to play"
 flat = true
 
-[node name="Label" type="Label" parent="CenterContainer/middle"]
-margin_top = 454.0
+[node name="copyright" type="Label" parent="CenterContainer/middle"]
+margin_top = 468.0
 margin_right = 680.0
-margin_bottom = 492.0
-text = "Copyright (c) 2019 - HashiCorp"
+margin_bottom = 668.0
+rect_min_size = Vector2( 0, 200 )
+text = "(c) 2019 HashiCorp"
 align = 1
-[connection signal="pressed" from="CenterContainer/middle/center/play" to="." method="_on_Play_pressed"]
+valign = 2
+[connection signal="pressed" from="CenterContainer/middle/actions/highscores/button" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="CenterContainer/middle/actions/play/button" to="." method="_on_Play_pressed"]

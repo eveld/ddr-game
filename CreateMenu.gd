@@ -7,7 +7,7 @@ func _ready():
 	songs = Game.get_songs()
 
 func _process(_delta):
-	$menu/center/options/song.text = get_song()
+	$menu/options/song.text = get_song()
 
 func _input(event):
 	if event.is_action_pressed("a"):

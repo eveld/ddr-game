@@ -7,6 +7,8 @@ var join_button
 
 func _ready():
 	active_option = options.CREATE_GAME
+	$menu/options/create/button.disabled = false
+	$menu/options/join/button.disabled = true
 
 func _input(event):
 	if event.is_action_pressed("e"):
@@ -16,13 +18,17 @@ func _input(event):
 			join_game()
 		
 	if event.is_action_pressed("q"):
-		cancel_game()
+		get_tree().change_scene("res://MainMenu.tscn")
 		
 	if event.is_action_pressed("a"):
 		active_option = options.CREATE_GAME
+		$menu/options/create/button.disabled = false
+		$menu/options/join/button.disabled = true
 		
 	if event.is_action_pressed("d"):
 		active_option = options.JOIN_GAME
+		$menu/options/create/button.disabled = true
+		$menu/options/join/button.disabled = false
 
 func create_game():
 	Game.set_master()
@@ -30,7 +36,4 @@ func create_game():
 	
 func join_game():
 	Game.reset_master()
-	get_tree().change_scene("res://JoinMenu.tscn")
-	
-func cancel_game():
-	get_tree().change_scene("res://MainMenu.tscn")
+	get_tree().change_scene("res://JoinMenu.tscn")	

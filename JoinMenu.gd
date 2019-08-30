@@ -10,7 +10,7 @@ func _ready():
 
 func _process(delta):
 	if games.size() > 0:
-		$menu/center/options/game.text = get_game().home_id
+		$menu/options/game.text = get_game().home_id
 
 func _input(event):
 	if event.is_action_pressed("a"):

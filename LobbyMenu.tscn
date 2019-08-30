@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://dance_theme.tres" type="Theme" id=1]
 [ext_resource path="res://LobbyMenu.gd" type="Script" id=2]
 [ext_resource path="res://title_bg.png" type="Texture" id=3]
-[ext_resource path="res://cancel_button.png" type="Texture" id=4]
-[ext_resource path="res://select_button.png" type="Texture" id=5]
+[ext_resource path="res://font_menu_title.tres" type="DynamicFont" id=4]
+[ext_resource path="res://cancel_button.png" type="Texture" id=5]
+[ext_resource path="res://select_button.png" type="Texture" id=6]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -20,91 +21,120 @@ texture = ExtResource( 3 )
 [node name="menu" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/separation = 100
 
-[node name="center" type="CenterContainer" parent="menu"]
+[node name="header" type="VBoxContainer" parent="menu"]
 margin_right = 1920.0
-margin_bottom = 800.0
-rect_min_size = Vector2( 0, 800 )
+margin_bottom = 300.0
+rect_min_size = Vector2( 0, 300 )
+alignment = 1
 
-[node name="options" type="HBoxContainer" parent="menu/center"]
-margin_left = 715.0
-margin_top = 248.0
-margin_right = 1205.0
-margin_bottom = 552.0
+[node name="title" type="Label" parent="menu/header"]
+margin_top = 95.0
+margin_right = 1920.0
+margin_bottom = 162.0
+custom_fonts/font = ExtResource( 4 )
+text = "Game lobby"
+align = 1
+valign = 1
+
+[node name="subtitle" type="Label" parent="menu/header"]
+margin_top = 166.0
+margin_right = 1920.0
+margin_bottom = 204.0
+text = "The game will start when all players are ready"
+align = 1
+valign = 1
+
+[node name="options" type="HBoxContainer" parent="menu"]
+margin_top = 304.0
+margin_right = 1920.0
+margin_bottom = 704.0
+rect_min_size = Vector2( 0, 400 )
 custom_constants/separation = 200
 alignment = 1
 
-[node name="home" type="VBoxContainer" parent="menu/center/options"]
-margin_right = 146.0
-margin_bottom = 304.0
+[node name="home" type="VBoxContainer" parent="menu/options"]
+margin_left = 560.0
+margin_right = 860.0
+margin_bottom = 400.0
 rect_min_size = Vector2( 0, 300 )
+alignment = 1
 
-[node name="avatar" type="TextureRect" parent="menu/center/options/home"]
-margin_right = 146.0
-margin_bottom = 262.0
-rect_min_size = Vector2( 0, 262 )
+[node name="avatar" type="TextureRect" parent="menu/options/home"]
+margin_top = 29.0
+margin_right = 300.0
+margin_bottom = 329.0
+rect_min_size = Vector2( 300, 300 )
 
-[node name="name" type="Label" parent="menu/center/options/home"]
-margin_top = 266.0
-margin_right = 146.0
-margin_bottom = 304.0
+[node name="name" type="Label" parent="menu/options/home"]
+margin_top = 333.0
+margin_right = 300.0
+margin_bottom = 371.0
 text = "home name"
+align = 1
+valign = 1
 
-[node name="away" type="VBoxContainer" parent="menu/center/options"]
-margin_left = 346.0
-margin_right = 490.0
-margin_bottom = 304.0
+[node name="away" type="VBoxContainer" parent="menu/options"]
+margin_left = 1060.0
+margin_right = 1360.0
+margin_bottom = 400.0
+alignment = 1
 
-[node name="avatar" type="TextureRect" parent="menu/center/options/away"]
-margin_right = 144.0
-margin_bottom = 262.0
-rect_min_size = Vector2( 0, 262 )
+[node name="avatar" type="TextureRect" parent="menu/options/away"]
+margin_top = 29.0
+margin_right = 300.0
+margin_bottom = 329.0
+rect_min_size = Vector2( 300, 300 )
 
-[node name="name" type="Label" parent="menu/center/options/away"]
-margin_top = 266.0
-margin_right = 144.0
-margin_bottom = 304.0
+[node name="name" type="Label" parent="menu/options/away"]
+margin_top = 333.0
+margin_right = 300.0
+margin_bottom = 371.0
 text = "away name"
+align = 1
+valign = 1
 
 [node name="actions" type="HBoxContainer" parent="menu"]
-margin_top = 900.0
+margin_top = 708.0
 margin_right = 1920.0
-margin_bottom = 948.0
+margin_bottom = 1008.0
+rect_min_size = Vector2( 0, 300 )
 custom_constants/separation = 700
 alignment = 1
 
 [node name="cancel" type="HBoxContainer" parent="menu/actions"]
-margin_left = 459.0
-margin_right = 619.0
-margin_bottom = 48.0
+margin_left = 467.0
+margin_right = 611.0
+margin_bottom = 300.0
 
 [node name="icon" type="TextureRect" parent="menu/actions/cancel"]
 margin_right = 48.0
-margin_bottom = 48.0
-texture = ExtResource( 4 )
+margin_bottom = 300.0
+texture = ExtResource( 5 )
+stretch_mode = 4
 
 [node name="button" type="Button" parent="menu/actions/cancel"]
 margin_left = 52.0
-margin_right = 160.0
-margin_bottom = 48.0
-text = "Cancel"
+margin_right = 144.0
+margin_bottom = 300.0
+text = "Leave"
 flat = true
 
 [node name="select" type="HBoxContainer" parent="menu/actions"]
-margin_left = 1319.0
-margin_right = 1461.0
-margin_bottom = 48.0
+margin_left = 1311.0
+margin_right = 1453.0
+margin_bottom = 300.0
 
 [node name="icon" type="TextureRect" parent="menu/actions/select"]
 margin_right = 48.0
-margin_bottom = 48.0
-texture = ExtResource( 5 )
+margin_bottom = 300.0
+texture = ExtResource( 6 )
+stretch_mode = 4
 
 [node name="button" type="Button" parent="menu/actions/select"]
 margin_left = 52.0
 margin_right = 142.0
-margin_bottom = 48.0
+margin_bottom = 300.0
 text = "Ready"
 flat = true
 
@@ -115,7 +145,7 @@ flat = true
 [node name="HTTP_leave_game" type="HTTPRequest" parent="."]
 
 [node name="refresh_game" type="Timer" parent="."]
-wait_time = 0.25
+wait_time = 0.1
 autostart = true
 [connection signal="request_completed" from="HTTP_get_game" to="." method="_on_HTTP_get_game_request_completed"]
 [connection signal="request_completed" from="HTTP_player_ready" to="." method="_on_HTTP_player_ready_request_completed"]

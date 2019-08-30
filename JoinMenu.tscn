@@ -1,17 +1,20 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://dance_theme.tres" type="Theme" id=1]
 [ext_resource path="res://JoinMenu.gd" type="Script" id=2]
 [ext_resource path="res://title_bg.png" type="Texture" id=3]
-[ext_resource path="res://left_arrow.png" type="Texture" id=4]
-[ext_resource path="res://fonts/ThaleahFat.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://right_arrow.png" type="Texture" id=6]
-[ext_resource path="res://cancel_button.png" type="Texture" id=7]
-[ext_resource path="res://select_button.png" type="Texture" id=8]
+[ext_resource path="res://font_menu_title.tres" type="DynamicFont" id=4]
+[ext_resource path="res://left_button.png" type="Texture" id=5]
+[ext_resource path="res://right_button.png" type="Texture" id=6]
+[ext_resource path="res://left_arrow.png" type="Texture" id=7]
+[ext_resource path="res://fonts/ThaleahFat.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://right_arrow.png" type="Texture" id=9]
+[ext_resource path="res://cancel_button.png" type="Texture" id=10]
+[ext_resource path="res://select_button.png" type="Texture" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
-font_data = ExtResource( 5 )
+font_data = ExtResource( 8 )
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -27,79 +30,134 @@ texture = ExtResource( 3 )
 [node name="menu" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/separation = 100
 
-[node name="center" type="CenterContainer" parent="menu"]
+[node name="header" type="VBoxContainer" parent="menu"]
 margin_right = 1920.0
-margin_bottom = 800.0
-rect_min_size = Vector2( 0, 800 )
+margin_bottom = 300.0
+rect_min_size = Vector2( 0, 300 )
+alignment = 1
 
-[node name="options" type="HBoxContainer" parent="menu/center"]
-margin_left = 714.0
-margin_top = 352.0
-margin_right = 1206.0
-margin_bottom = 448.0
-custom_constants/separation = 50
-
-[node name="left" type="TextureRect" parent="menu/center/options"]
-margin_right = 96.0
-margin_bottom = 96.0
-texture = ExtResource( 4 )
-
-[node name="game" type="Label" parent="menu/center/options"]
-margin_left = 146.0
-margin_top = 14.0
-margin_right = 346.0
-margin_bottom = 81.0
-rect_min_size = Vector2( 200, 0 )
-custom_fonts/font = SubResource( 1 )
-text = "game"
+[node name="title" type="Label" parent="menu/header"]
+margin_top = 90.0
+margin_right = 1920.0
+margin_bottom = 157.0
+custom_fonts/font = ExtResource( 4 )
+text = "Choose which game to join"
 align = 1
+valign = 1
 
-[node name="right" type="TextureRect" parent="menu/center/options"]
-margin_left = 396.0
-margin_right = 492.0
-margin_bottom = 96.0
+[node name="subtitle" type="HBoxContainer" parent="menu/header"]
+margin_top = 161.0
+margin_right = 1920.0
+margin_bottom = 209.0
+alignment = 1
+
+[node name="use" type="Label" parent="menu/header/subtitle"]
+margin_left = 571.0
+margin_top = 5.0
+margin_right = 627.0
+margin_bottom = 43.0
+text = "Use"
+
+[node name="left" type="TextureRect" parent="menu/header/subtitle"]
+margin_left = 631.0
+margin_right = 679.0
+margin_bottom = 48.0
+texture = ExtResource( 5 )
+
+[node name="and" type="Label" parent="menu/header/subtitle"]
+margin_left = 683.0
+margin_top = 5.0
+margin_right = 739.0
+margin_bottom = 43.0
+text = "and"
+
+[node name="right" type="TextureRect" parent="menu/header/subtitle"]
+margin_left = 743.0
+margin_right = 791.0
+margin_bottom = 48.0
 texture = ExtResource( 6 )
 
-[node name="actions" type="HBoxContainer" parent="menu"]
-margin_top = 900.0
+[node name="to" type="Label" parent="menu/header/subtitle"]
+margin_left = 795.0
+margin_top = 5.0
+margin_right = 1349.0
+margin_bottom = 43.0
+text = "to scroll through the available games"
+
+[node name="options" type="HBoxContainer" parent="menu"]
+margin_top = 304.0
 margin_right = 1920.0
-margin_bottom = 948.0
+margin_bottom = 704.0
+rect_min_size = Vector2( 0, 400 )
+custom_constants/separation = 50
+alignment = 1
+
+[node name="left" type="TextureRect" parent="menu/options"]
+margin_left = 598.0
+margin_right = 694.0
+margin_bottom = 400.0
+texture = ExtResource( 7 )
+stretch_mode = 4
+
+[node name="game" type="Label" parent="menu/options"]
+margin_left = 744.0
+margin_top = 166.0
+margin_right = 1176.0
+margin_bottom = 233.0
+rect_min_size = Vector2( 200, 0 )
+custom_fonts/font = SubResource( 1 )
+text = "No games found"
+align = 1
+
+[node name="right" type="TextureRect" parent="menu/options"]
+margin_left = 1226.0
+margin_right = 1322.0
+margin_bottom = 400.0
+texture = ExtResource( 9 )
+stretch_mode = 4
+
+[node name="actions" type="HBoxContainer" parent="menu"]
+margin_top = 708.0
+margin_right = 1920.0
+margin_bottom = 1008.0
+rect_min_size = Vector2( 0, 300 )
 custom_constants/separation = 700
 alignment = 1
 
 [node name="cancel" type="HBoxContainer" parent="menu/actions"]
 margin_left = 451.0
 margin_right = 611.0
-margin_bottom = 48.0
+margin_bottom = 300.0
 
 [node name="icon" type="TextureRect" parent="menu/actions/cancel"]
 margin_right = 48.0
-margin_bottom = 48.0
-texture = ExtResource( 7 )
+margin_bottom = 300.0
+texture = ExtResource( 10 )
+stretch_mode = 4
 
 [node name="button" type="Button" parent="menu/actions/cancel"]
 margin_left = 52.0
 margin_right = 160.0
-margin_bottom = 48.0
+margin_bottom = 300.0
 text = "Cancel"
 flat = true
 
 [node name="select" type="HBoxContainer" parent="menu/actions"]
 margin_left = 1311.0
 margin_right = 1469.0
-margin_bottom = 48.0
+margin_bottom = 300.0
 
 [node name="icon" type="TextureRect" parent="menu/actions/select"]
 margin_right = 48.0
-margin_bottom = 48.0
-texture = ExtResource( 8 )
+margin_bottom = 300.0
+texture = ExtResource( 11 )
+stretch_mode = 4
 
 [node name="button" type="Button" parent="menu/actions/select"]
 margin_left = 52.0
 margin_right = 158.0
-margin_bottom = 48.0
+margin_bottom = 300.0
 text = "Select"
 flat = true
 

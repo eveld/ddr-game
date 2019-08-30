@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://dance_theme.tres" type="Theme" id=1]
 [ext_resource path="res://GameMenu.gd" type="Script" id=2]
 [ext_resource path="res://title_bg.png" type="Texture" id=3]
-[ext_resource path="res://cancel_button.png" type="Texture" id=4]
-[ext_resource path="res://select_button.png" type="Texture" id=5]
+[ext_resource path="res://font_menu_title.tres" type="DynamicFont" id=4]
+[ext_resource path="res://left_button.png" type="Texture" id=5]
+[ext_resource path="res://right_button.png" type="Texture" id=6]
+[ext_resource path="res://cancel_button.png" type="Texture" id=7]
+[ext_resource path="res://select_button.png" type="Texture" id=8]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -20,68 +23,114 @@ texture = ExtResource( 3 )
 [node name="menu" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_constants/separation = 100
 
-[node name="center" type="CenterContainer" parent="menu"]
+[node name="header" type="VBoxContainer" parent="menu"]
 margin_right = 1920.0
-margin_bottom = 800.0
-rect_min_size = Vector2( 0, 800 )
+margin_bottom = 300.0
+rect_min_size = Vector2( 0, 300 )
+alignment = 1
 
-[node name="options" type="HBoxContainer" parent="menu/center"]
-margin_left = 613.0
-margin_top = 381.0
-margin_right = 1307.0
-margin_bottom = 419.0
+[node name="title" type="Label" parent="menu/header"]
+margin_top = 95.0
+margin_right = 1920.0
+margin_bottom = 162.0
+custom_fonts/font = ExtResource( 4 )
+text = "Choose an option"
+align = 1
+valign = 1
+
+[node name="subtitle" type="Label" parent="menu/header"]
+margin_top = 166.0
+margin_right = 1920.0
+margin_bottom = 204.0
+text = "Create a new game or join an already existing game"
+align = 1
+valign = 1
+
+[node name="options" type="HBoxContainer" parent="menu"]
+margin_top = 304.0
+margin_right = 1920.0
+margin_bottom = 704.0
+rect_min_size = Vector2( 0, 400 )
 custom_constants/separation = 200
+alignment = 1
 
-[node name="create" type="Button" parent="menu/center/options"]
-margin_right = 238.0
-margin_bottom = 38.0
+[node name="create" type="HBoxContainer" parent="menu/options"]
+margin_left = 561.0
+margin_right = 851.0
+margin_bottom = 400.0
+
+[node name="icon" type="TextureRect" parent="menu/options/create"]
+margin_right = 48.0
+margin_bottom = 400.0
+texture = ExtResource( 5 )
+stretch_mode = 4
+
+[node name="button" type="Button" parent="menu/options/create"]
+margin_left = 52.0
+margin_right = 290.0
+margin_bottom = 400.0
 text = "Create new game"
+flat = true
 
-[node name="join" type="Button" parent="menu/center/options"]
-margin_left = 438.0
-margin_right = 694.0
-margin_bottom = 38.0
+[node name="join" type="HBoxContainer" parent="menu/options"]
+margin_left = 1051.0
+margin_right = 1359.0
+margin_bottom = 400.0
+
+[node name="icon" type="TextureRect" parent="menu/options/join"]
+margin_right = 48.0
+margin_bottom = 400.0
+texture = ExtResource( 6 )
+stretch_mode = 4
+
+[node name="button" type="Button" parent="menu/options/join"]
+margin_left = 52.0
+margin_right = 308.0
+margin_bottom = 400.0
 text = "Join existing game"
+flat = true
 
 [node name="actions" type="HBoxContainer" parent="menu"]
-margin_top = 900.0
+margin_top = 708.0
 margin_right = 1920.0
-margin_bottom = 948.0
+margin_bottom = 1008.0
+rect_min_size = Vector2( 0, 300 )
 custom_constants/separation = 700
 alignment = 1
 
 [node name="cancel" type="HBoxContainer" parent="menu/actions"]
 margin_left = 451.0
 margin_right = 611.0
-margin_bottom = 48.0
+margin_bottom = 300.0
 
 [node name="icon" type="TextureRect" parent="menu/actions/cancel"]
 margin_right = 48.0
-margin_bottom = 48.0
-texture = ExtResource( 4 )
+margin_bottom = 300.0
+texture = ExtResource( 7 )
+stretch_mode = 4
 
 [node name="button" type="Button" parent="menu/actions/cancel"]
 margin_left = 52.0
 margin_right = 160.0
-margin_bottom = 48.0
+margin_bottom = 300.0
 text = "Cancel"
 flat = true
 
 [node name="select" type="HBoxContainer" parent="menu/actions"]
 margin_left = 1311.0
 margin_right = 1469.0
-margin_bottom = 48.0
+margin_bottom = 300.0
 
 [node name="icon" type="TextureRect" parent="menu/actions/select"]
 margin_right = 48.0
-margin_bottom = 48.0
-texture = ExtResource( 5 )
+margin_bottom = 300.0
+texture = ExtResource( 8 )
+stretch_mode = 4
 
 [node name="button" type="Button" parent="menu/actions/select"]
 margin_left = 52.0
 margin_right = 158.0
-margin_bottom = 48.0
+margin_bottom = 300.0
 text = "Select"
 flat = true

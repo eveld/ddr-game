@@ -11,17 +11,17 @@ func _process(delta):
 		start_game()
 		
 	if home_ready:
-		$menu/center/options/home/avatar.texture = load("res://ready.png")
+		$menu/options/home/avatar.texture = load("res://ready.png")
 	else:
-		$menu/center/options/home/avatar.texture = load("res://waiting.png")
+		$menu/options/home/avatar.texture = load("res://waiting.png")
 		
 	if away_ready:
-		$menu/center/options/away/avatar.texture = load("res://ready.png")
+		$menu/options/away/avatar.texture = load("res://ready.png")
 	else:
-		$menu/center/options/away/avatar.texture = load("res://waiting.png")
+		$menu/options/away/avatar.texture = load("res://waiting.png")
 		
-	$menu/center/options/home/name.text = home_id
-	$menu/center/options/away/name.text = away_id
+	$menu/options/home/name.text = home_id
+	$menu/options/away/name.text = away_id
 
 func _input(event):
 	if event.is_action_pressed("e"):
@@ -38,8 +38,6 @@ func _on_refresh_game_timeout():
 func _on_HTTP_get_game_request_completed(result, response_code, headers, body):
 	if(response_code == 200):
 		var response = JSON.parse(body.get_string_from_utf8()).result
-		
-		print(response)
 		
 		home_id = response.home_id
 		home_ready = response.home_ready
