@@ -98,12 +98,17 @@ func _read_audio(path):
 	return parsed.result
 
 func _on_music_finished():
-	print("finished")
 	game_over = true
 	$gameover_label.show()
+	var url = Game.get_server() + "/games/" + Game.get_game_id() + "/scores/new"
 	var headers = ["Content-Type: application/json"]
-	var url = Game.get_server() + "/scores/new?player=" + Game.get_player_id() + "&game=" + Game.get_game_id() + "&points=" + str(Game.score)
-	$HTTPRequest_leave_game.request(url, headers, false, HTTPClient.METHOD_POST, "")
+	
+	var query = JSON.print({
+		"player": Game.get_player_id(),
+		"points": Game.score
+	})
+	
+	$HTTPRequest_leave_game.request(url, headers, false, HTTPClient.METHOD_POST, query)
 	$gameover_timer.start()
 
 func _on_gameover_timer_timeout():

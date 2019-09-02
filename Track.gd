@@ -34,8 +34,7 @@ func _process(delta):
 			var deleted_instance = bar_instances.pop_front()
 			for note in deleted_instance.note_instances:
 				if note.allocation != null:
-					print("deleting allocation" + note.allocation)
-					var url = Game.get_server() + "/allocations/" + note.allocation
+					var url = Game.get_server() + "/games/" + Game.get_game_id() + "/allocations/" + note.allocation
 					var headers = ["Content-Type: application/json"]
 					$HTTP_clear_allocation.request(url, headers, false, HTTPClient.METHOD_DELETE, "")
 			

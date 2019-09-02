@@ -4,6 +4,8 @@ var home_ready = false
 var away_ready = false
 var all_ready = false
 
+var requesting_game = false
+
 var home_id = ""
 var away_id = ""
 
@@ -32,11 +34,14 @@ func _input(event):
 		leave_game()
 
 func _on_refresh_game_timeout():
-	var url = Game.get_server() + "/games/" + Game.get_game_id()
-	var headers = ["Content-Type: application/json"]
-	$HTTP_get_game.request(url, headers, false, HTTPClient.METHOD_GET, "")
+	if !requesting_game:
+		var url = Game.get_server() + "/games/" + Game.get_game_id()
+		var headers = ["Content-Type: application/json"]
+		$HTTP_get_game.request(url, headers, false, HTTPClient.METHOD_GET, "")
+		requesting_game = true
 
 func _on_HTTP_get_game_request_completed(result, response_code, headers, body):
+	requesting_game = false
 	if(response_code == 200):
 		var response = JSON.parse(body.get_string_from_utf8()).result
 		
@@ -55,9 +60,14 @@ func _on_HTTP_get_game_request_completed(result, response_code, headers, body):
 					all_ready = true
 
 func player_ready():
-	var url = Game.get_server() + "/games/" + Game.get_game_id() + "/ready?player=" + Game.get_player_id()
+	var url = Game.get_server() + "/games/" + Game.get_game_id() + "/ready"
 	var headers = ["Content-Type: application/json"]
-	$HTTP_player_ready.request(url, headers, false, HTTPClient.METHOD_POST, "")
+	
+	var query = JSON.print({
+		"player": Game.get_player_id()
+	})
+	
+	$HTTP_player_ready.request(url, headers, false, HTTPClient.METHOD_POST, query)
 
 func _on_HTTP_player_ready_request_completed( result, response_code, headers, body ):
 	if(response_code == 200):
@@ -73,9 +83,14 @@ func _on_HTTP_start_game_request_completed(result, response_code, headers, body)
 		get_tree().change_scene("res://Main.tscn")
 
 func leave_game():
-	var url = Game.get_server() + "/games/" + Game.get_game_id() + "/leave?player=" + Game.get_player_id()
+	var url = Game.get_server() + "/games/" + Game.get_game_id() + "/leave"
 	var headers = ["Content-Type: application/json"]
-	$HTTP_leave_game.request(url, headers, false, HTTPClient.METHOD_POST, "")
+	
+	var query = JSON.print({
+		"player": Game.get_player_id()
+	})
+	
+	$HTTP_leave_game.request(url, headers, false, HTTPClient.METHOD_POST, query)
 
 func _on_HTTP_leave_game_request_completed(result, response_code, headers, body):
 	if(response_code == 200):
