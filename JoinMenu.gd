@@ -8,7 +8,7 @@ func _ready():
 	var headers = ["Content-Type: application/json"]
 	$HTTP_get_games.request(url, headers, false, HTTPClient.METHOD_GET, "")
 
-func _process(delta):
+func _process(_delta):
 	if games.size() > 0:
 		$menu/options/game.text = get_game().home_id
 
@@ -25,7 +25,7 @@ func _input(event):
 	if event.is_action_pressed("q"):
 		get_tree().change_scene("res://GameMenu.tscn")
 
-func _on_HTTP_get_games_request_completed(result, response_code, headers, body):
+func _on_HTTP_get_games_request_completed(_result, response_code, _headers, body):
 	if(response_code == 200):
 		var response = JSON.parse(body.get_string_from_utf8()).result
 		for game in response:
@@ -60,7 +60,7 @@ func join_game():
 	
 	$HTTP_join_game.request(url, headers, false, HTTPClient.METHOD_POST, query)
 
-func _on_HTTP_join_game_request_completed(result, response_code, headers, body):
+func _on_HTTP_join_game_request_completed(_result, response_code, _headers, body):
 	if(response_code == 200):
 		var response = JSON.parse(body.get_string_from_utf8()).result
 		Game.set_game_id(response.id)

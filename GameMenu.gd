@@ -2,8 +2,6 @@ extends Control
 
 enum options {CREATE_GAME, JOIN_GAME}
 var active_option
-var create_button
-var join_button
 
 func _ready():
 	active_option = options.CREATE_GAME

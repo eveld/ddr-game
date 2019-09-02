@@ -1,11 +1,9 @@
 extends Node
 
 var players = 1
-var max_players = 2
 
 var score = 0
 var is_master = false
-var player_index = 0
 
 var song_index = 0
 var songs = ["maidentradesbleeps", "beatstruck", "audio"]
@@ -61,7 +59,7 @@ func set_master():
 func reset_master():
 	is_master = false
 	
-func is_master():
+func get_is_master():
 	return is_master
 
 func set_song(index):

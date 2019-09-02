@@ -35,10 +35,10 @@ func _input(event):
 
 func _on_refresh_game_timeout():
 	if !requesting_game:
+		requesting_game = true
 		var url = Game.get_server() + "/games/" + Game.get_game_id()
 		var headers = ["Content-Type: application/json"]
 		$HTTP_get_game.request(url, headers, false, HTTPClient.METHOD_GET, "")
-		requesting_game = true
 
 func _on_HTTP_get_game_request_completed(result, response_code, headers, body):
 	requesting_game = false
@@ -69,7 +69,7 @@ func player_ready():
 	
 	$HTTP_player_ready.request(url, headers, false, HTTPClient.METHOD_POST, query)
 
-func _on_HTTP_player_ready_request_completed( result, response_code, headers, body ):
+func _on_HTTP_player_ready_request_completed( result, response_code, _headers, body ):
 	if(response_code == 200):
 		var response = JSON.parse(body.get_string_from_utf8()).result
 		
@@ -78,7 +78,7 @@ func start_game():
 	var headers = ["Content-Type: application/json"]
 	$HTTP_start_game.request(url, headers, false, HTTPClient.METHOD_POST, "")
 
-func _on_HTTP_start_game_request_completed(result, response_code, headers, body):
+func _on_HTTP_start_game_request_completed(result, response_code, _headers, body):
 	if(response_code == 200):
 		get_tree().change_scene("res://Main.tscn")
 
