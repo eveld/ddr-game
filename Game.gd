@@ -13,6 +13,8 @@ var player_id = ""
 var server = ""
 
 func _ready():
+	print(OS.get_user_data_dir())
+	
 	# Set defaults from config file.
 	var file = File.new()
 	if(!file.file_exists("user://config.cfg")):
