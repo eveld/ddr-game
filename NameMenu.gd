@@ -34,11 +34,11 @@ func _input(event):
 		next_selector()
 		
 	if event.is_action_pressed("q"):
-		get_tree().change_scene("res://MainMenu.tscn")
+		var _err = get_tree().change_scene("res://MainMenu.tscn")
 		
 	if event.is_action_pressed("e"):
 		Game.set_player_id(get_name())
-		get_tree().change_scene("res://GameMenu.tscn")
+		var _err = get_tree().change_scene("res://GameMenu.tscn")
 
 func get_name():
 	var first = characters[selectors[0]]

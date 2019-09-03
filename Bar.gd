@@ -18,17 +18,11 @@ func _ready():
 	# Fetch allocations from server
 	var allocation_count = notes.size()
 	if allocation_count > 0:
-		var url = Game.get_server() + "/games/" + Game.get_game_id() + "/allocations"
+		var url = Game.get_server() + "/games/" + Game.get_game_id() + "/allocations?count=" + str(allocation_count)
 		var headers = ["Content-Type: application/json"]
+		$HTTP_get_allocations.request(url, headers, false, HTTPClient.METHOD_GET, "")
 		
-		var query = JSON.print({
-			"player": Game.get_player_id(),
-			"count": allocation_count
-	}	)
-		
-		$HTTP_get_allocations.request(url, headers, false, HTTPClient.METHOD_GET, query)
-		
-func _on_HTTP_get_allocations_request_completed(result, response_code, headers, body):
+func _on_HTTP_get_allocations_request_completed(_result, response_code, _headers, body):
 	if(response_code == 200):
 		var allocations = JSON.parse(body.get_string_from_utf8()).result
 		for note in notes:

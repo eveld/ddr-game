@@ -16,7 +16,7 @@ func _input(event):
 			join_game()
 		
 	if event.is_action_pressed("q"):
-		get_tree().change_scene("res://MainMenu.tscn")
+		var _err = get_tree().change_scene("res://MainMenu.tscn")
 		
 	if event.is_action_pressed("a"):
 		active_option = options.CREATE_GAME
@@ -30,8 +30,8 @@ func _input(event):
 
 func create_game():
 	Game.set_master()
-	get_tree().change_scene("res://CreateMenu.tscn")
+	var _err = get_tree().change_scene("res://CreateMenu.tscn")
 	
 func join_game():
 	Game.reset_master()
-	get_tree().change_scene("res://JoinMenu.tscn")	
+	var _err = get_tree().change_scene("res://JoinMenu.tscn")	

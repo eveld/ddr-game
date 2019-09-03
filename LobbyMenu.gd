@@ -5,12 +5,13 @@ var away_ready = false
 var all_ready = false
 
 var requesting_game = false
+var starting_game = false
 
 var home_id = ""
 var away_id = ""
 
-func _process(delta):
-	if all_ready:
+func _process(_delta):
+	if all_ready && !starting_game:
 		start_game()
 		
 	if home_ready:
@@ -40,9 +41,10 @@ func _on_refresh_game_timeout():
 		var headers = ["Content-Type: application/json"]
 		$HTTP_get_game.request(url, headers, false, HTTPClient.METHOD_GET, "")
 
-func _on_HTTP_get_game_request_completed(result, response_code, headers, body):
-	requesting_game = false
+func _on_HTTP_get_game_request_completed(_result, response_code, _headers, body):
 	if(response_code == 200):
+		requesting_game = false
+		
 		var response = JSON.parse(body.get_string_from_utf8()).result
 		
 		home_id = response.home_id
@@ -69,16 +71,19 @@ func player_ready():
 	
 	$HTTP_player_ready.request(url, headers, false, HTTPClient.METHOD_POST, query)
 
-func _on_HTTP_player_ready_request_completed( result, response_code, _headers, body ):
+func _on_HTTP_player_ready_request_completed(_result, response_code, _headers, _body ):
 	if(response_code == 200):
-		var response = JSON.parse(body.get_string_from_utf8()).result
+		pass
 		
 func start_game():
+	starting_game = true
 	var url = Game.get_server() + "/games/" + Game.get_game_id() + "/start"
 	var headers = ["Content-Type: application/json"]
-	$HTTP_start_game.request(url, headers, false, HTTPClient.METHOD_POST, "")
+	
+	var query = JSON.print({})
+	$HTTP_start_game.request(url, headers, false, HTTPClient.METHOD_POST, query)
 
-func _on_HTTP_start_game_request_completed(result, response_code, _headers, body):
+func _on_HTTP_start_game_request_completed(_result, response_code, _headers, _body):
 	if(response_code == 200):
 		get_tree().change_scene("res://Main.tscn")
 
@@ -92,6 +97,6 @@ func leave_game():
 	
 	$HTTP_leave_game.request(url, headers, false, HTTPClient.METHOD_POST, query)
 
-func _on_HTTP_leave_game_request_completed(result, response_code, headers, body):
+func _on_HTTP_leave_game_request_completed(_result, response_code, _headers, _body):
 	if(response_code == 200):
-		get_tree().change_scene("res://GameMenu.tscn")
+		var _err = get_tree().change_scene("res://GameMenu.tscn")

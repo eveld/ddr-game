@@ -50,7 +50,7 @@ func _on_area_entered(area):
 	if area.is_in_group("note"):
 		note = area.get_parent()
 
-func _on_HTTP_stop_allocation_request_completed(result, response_code, headers, body):
+func _on_HTTP_stop_allocation_request_completed(_result, response_code, _headers, body):
 	if(response_code == 200):
 		var id = JSON.parse(body.get_string_from_utf8()).result
 		print("stopped " + id)

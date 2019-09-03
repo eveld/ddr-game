@@ -53,7 +53,4 @@ func _on_HTTP_create_game_request_completed(_result, response_code, _headers, bo
 		Game.set_game_id(response.id)
 		Game.set_player_id(response.home_id)
 		
-		print("game: " + Game.get_game_id())
-		print("player: " + Game.get_player_id())
-		
-		get_tree().change_scene("res://LobbyMenu.tscn")
+		var _err = get_tree().change_scene("res://LobbyMenu.tscn")

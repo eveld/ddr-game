@@ -8,7 +8,7 @@ func _input(event):
 		show_highscores()
 
 func start_game():
-	get_tree().change_scene("res://NameMenu.tscn")
+	var _err = get_tree().change_scene("res://NameMenu.tscn")
 	
 func show_highscores():
-	get_tree().change_scene("res://Highscores.tscn")
+	var _err = get_tree().change_scene("res://Highscores.tscn")

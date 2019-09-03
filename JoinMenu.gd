@@ -23,7 +23,7 @@ func _input(event):
 		join_game()
 		
 	if event.is_action_pressed("q"):
-		get_tree().change_scene("res://GameMenu.tscn")
+		var _err = get_tree().change_scene("res://GameMenu.tscn")
 
 func _on_HTTP_get_games_request_completed(_result, response_code, _headers, body):
 	if(response_code == 200):

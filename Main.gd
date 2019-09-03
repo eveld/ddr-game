@@ -18,20 +18,13 @@ var game_over = false
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
-			get_tree().reload_current_scene()
+			var _err = get_tree().reload_current_scene()
 			
 	if !game_over:
 		$score_label.text = "%d" % Game.score
 		
 		# Animate the grid...
 		$floor.get_surface_material(0).uv1_offset.z -= 0.05
-#
-#		var finished = 0
-#		for track_instance in track_instances:
-#			if track_instance.finished:
-#				finished += 1
-#		if finished == track_count:
-			
 
 func _ready():
 	var data = _read_audio("res://" + Game.get_song() + ".json")
@@ -112,8 +105,8 @@ func _on_music_finished():
 	$gameover_timer.start()
 
 func _on_gameover_timer_timeout():
-	get_tree().change_scene("res://Highscores.tscn")
+	var _err = get_tree().change_scene("res://Highscores.tscn")
 
-func _on_HTTPRequest_leave_game_request_completed(result, response_code, headers, body):
+func _on_HTTPRequest_leave_game_request_completed(_result, response_code, _headers, body):
 	if(response_code == 200):
 		pass
