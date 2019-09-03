@@ -104,9 +104,16 @@ func _on_music_finished():
 	$HTTPRequest_leave_game.request(url, headers, false, HTTPClient.METHOD_POST, query)
 	$gameover_timer.start()
 
+	var alloc_url = Game.get_server() + "/games/" + Game.get_game_id() + "/allocations"
+	$HTTPRequest_clear_allocs.request(alloc_url, headers, false, HTTPClient.METHOD_DELETE, "")
+
 func _on_gameover_timer_timeout():
 	var _err = get_tree().change_scene("res://Highscores.tscn")
 
 func _on_HTTPRequest_leave_game_request_completed(_result, response_code, _headers, body):
+	if(response_code == 200):
+		pass
+
+func _on_HTTPRequest_clear_allocs_request_completed(result, response_code, headers, body):
 	if(response_code == 200):
 		pass

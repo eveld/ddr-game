@@ -118,7 +118,10 @@ shadow_enabled = true
 directional_shadow_mode = 0
 
 [node name="HTTPRequest_leave_game" type="HTTPRequest" parent="."]
+
+[node name="HTTPRequest_clear_allocs" type="HTTPRequest" parent="."]
 [connection signal="finished" from="music" to="." method="_on_music_finished"]
 [connection signal="timeout" from="countdown_timer" to="." method="_on_countdown_timer_timeout"]
 [connection signal="timeout" from="gameover_timer" to="." method="_on_gameover_timer_timeout"]
 [connection signal="request_completed" from="HTTPRequest_leave_game" to="." method="_on_HTTPRequest_leave_game_request_completed"]
+[connection signal="request_completed" from="HTTPRequest_clear_allocs" to="." method="_on_HTTPRequest_clear_allocs_request_completed"]

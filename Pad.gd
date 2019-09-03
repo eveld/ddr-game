@@ -32,9 +32,10 @@ func collect():
 			Game.increase_score(10)
 			
 			# Kill the allocation
-			var url = Game.get_server() + "/games/" + Game.get_game_id() + "/allocations" + note.allocation + "/stop"
+			var url = Game.get_server() + "/games/" + Game.get_game_id() + "/allocations/" + note.allocation + "/stop"
 			var headers = ["Content-Type: application/json"]
-			$HTTP_stop_allocation.request(url, headers, false, HTTPClient.METHOD_POST, "")
+			var query = JSON.print({})
+			$HTTP_stop_allocation.request(url, headers, false, HTTPClient.METHOD_POST, query)
 		else:
 			Game.increase_score(50)
 		
