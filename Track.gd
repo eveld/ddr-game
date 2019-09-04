@@ -22,7 +22,7 @@ func setup(game, track):
 	color = track.color
 	controls = track.controls
 	var offset = []
-	for i in range(game.offset):
+	for _i in range(game.offset):
 		offset.append({"notes": []})
 	bars = offset + track.bars
 

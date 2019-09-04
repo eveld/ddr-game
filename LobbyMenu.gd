@@ -85,7 +85,7 @@ func start_game():
 
 func _on_HTTP_start_game_request_completed(_result, response_code, _headers, _body):
 	if(response_code == 200):
-		get_tree().change_scene("res://Main.tscn")
+		var _err = get_tree().change_scene("res://Main.tscn")
 
 func leave_game():
 	var url = Game.get_server() + "/games/" + Game.get_game_id() + "/leave"
