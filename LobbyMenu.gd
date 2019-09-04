@@ -15,14 +15,14 @@ func _process(_delta):
 		start_game()
 		
 	if home_ready:
-		$menu/options/home/avatar.texture = load("res://ready.png")
+		$menu/options/home/name.add_color_override("font_color", Color(0, 1, 0))
 	else:
-		$menu/options/home/avatar.texture = load("res://waiting.png")
+		$menu/options/home/name.add_color_override("font_color", Color(1, 0.32, 0.03))
 		
 	if away_ready:
-		$menu/options/away/avatar.texture = load("res://ready.png")
+		$menu/options/away/name.add_color_override("font_color", Color(0, 1, 0))
 	else:
-		$menu/options/away/avatar.texture = load("res://waiting.png")
+		$menu/options/away/name.add_color_override("font_color", Color(1, 0.32, 0.03))
 		
 	$menu/options/home/name.text = home_id
 	$menu/options/away/name.text = away_id

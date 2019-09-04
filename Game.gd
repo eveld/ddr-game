@@ -27,7 +27,6 @@ var rng = RandomNumberGenerator.new()
 
 func _ready():
 	print(OS.get_user_data_dir())
-	get_tile_for_keys(["q", "a"])
 
 func get_tile_server():
 	return tile_server
@@ -36,7 +35,7 @@ func get_tile_for_keys(keys):
 	rng.set_seed(OS.get_unix_time())
 	rng.randomize()
 	var index = floor(rng.randi_range(0, len(keys)-1))
-	return keys[index]
+	return tiles[keys[index]]
 	
 func set_server(endpoint):
 	server = endpoint

@@ -53,11 +53,21 @@ func _on_area_entered(area):
 		
 		# Get the tile for the note and light it
 		var url = Game.get_tile_server() + "/led/" + Game.get_tile_for_keys(controls)
-		print("light up " + url)
 		var headers = ["Content-Type: application/json"]
+		
+		print("lighting " + url)
+		
 		$HTTP_light_tile.request(url, headers, false, HTTPClient.METHOD_POST, "")
 
 func _on_HTTP_stop_allocation_request_completed(_result, response_code, _headers, body):
 	if(response_code == 200):
 		var id = JSON.parse(body.get_string_from_utf8()).result
 		print("stopped " + id)
+
+func _on_area_area_exited(area):
+	var url = Game.get_tile_server() + "/led/" + Game.get_tile_for_keys(controls)
+	var headers = ["Content-Type: application/json"]
+	
+	print("dimming " + url)
+	
+	$HTTP_dim_tile.request(url, headers, false, HTTPClient.METHOD_DELETE, "")

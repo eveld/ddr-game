@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://dance_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Highscores.gd" type="Script" id=2]
@@ -7,7 +7,9 @@
 [ext_resource path="res://fonts/ThaleahFat.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://cancel_button.png" type="Texture" id=6]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="DynamicFont" id=2]
 size = 64
 font_data = ExtResource( 5 )
 
@@ -67,12 +69,13 @@ size_flags_vertical = 3
 custom_constants/separation = 200
 alignment = 1
 
-[node name="scores" type="Label" parent="menu/options"]
-margin_left = 956.0
-margin_right = 964.0
+[node name="scores" type="RichTextLabel" parent="menu/options"]
+margin_left = 710.0
+margin_right = 1210.0
 margin_bottom = 472.0
-size_flags_vertical = 5
-custom_fonts/font = SubResource( 1 )
+rect_min_size = Vector2( 500, 0 )
+custom_styles/normal = SubResource( 3 )
+custom_fonts/normal_font = SubResource( 2 )
 
 [node name="actions" type="HBoxContainer" parent="menu"]
 margin_top = 780.0

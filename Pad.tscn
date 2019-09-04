@@ -26,5 +26,8 @@ shape = SubResource( 2 )
 [node name="HTTP_stop_allocation" type="HTTPRequest" parent="."]
 
 [node name="HTTP_light_tile" type="HTTPRequest" parent="."]
+
+[node name="HTTP_dim_tile" type="HTTPRequest" parent="."]
 [connection signal="area_entered" from="area" to="." method="_on_area_entered"]
+[connection signal="area_exited" from="area" to="." method="_on_area_area_exited"]
 [connection signal="request_completed" from="HTTP_stop_allocation" to="." method="_on_HTTP_stop_allocation_request_completed"]
