@@ -2,18 +2,24 @@ extends Spatial
 
 # Defaults
 var controls = []
-var color = Color()
+var left_color = Color()
+var right_color = Color()
 
 var note
 
-func setup(track):
-	color = track.color
+func setup(track, colors):
+	left_color = colors[0]
+	right_color = colors[1]
 	controls = track.controls
 
 func _ready():
-	var material = SpatialMaterial.new()
-	material.albedo_color = color
-	$mesh.set_surface_material(0, material)
+	var left_material = SpatialMaterial.new()
+	left_material.albedo_color = left_color
+	$control/left.set_surface_material(0, left_material)
+	
+	var right_material = SpatialMaterial.new()
+	right_material.albedo_color = right_color
+	$control/right.set_surface_material(0, right_material)
 	
 func _input(event):
 	for control in controls:
@@ -27,13 +33,17 @@ func collect():
 	if is_instance_valid(note) && !note.is_collected:
 		note.collect()
 		
+		var url = Game.get_tile_server() + "/led/" + note.product
+		var headers = ["Content-Type: application/json"]
+		$HTTP_dim_tile.request(url, headers, false, HTTPClient.METHOD_DELETE, "")
+		
 		# Award bonus points for non-existent allocations.
 		if note.allocation:
 			Game.increase_score(10)
 			
 			# Kill the allocation
-			var url = Game.get_server() + "/games/" + Game.get_game_id() + "/allocations/" + note.allocation + "/stop"
-			var headers = ["Content-Type: application/json"]
+			url = Game.get_server() + "/games/" + Game.get_game_id() + "/allocations/" + note.allocation + "/stop"
+			headers = ["Content-Type: application/json"]
 			var query = JSON.print({})
 			$HTTP_stop_allocation.request(url, headers, false, HTTPClient.METHOD_POST, query)
 		else:
@@ -52,22 +62,14 @@ func _on_area_entered(area):
 		note = area.get_parent()
 		
 		# Get the tile for the note and light it
-		var url = Game.get_tile_server() + "/led/" + Game.get_tile_for_keys(controls)
+		var url = Game.get_tile_server() + "/led/" + note.product
 		var headers = ["Content-Type: application/json"]
-		
-		print("lighting " + url)
-		
 		$HTTP_light_tile.request(url, headers, false, HTTPClient.METHOD_POST, "")
 
-func _on_HTTP_stop_allocation_request_completed(_result, response_code, _headers, body):
-	if(response_code == 200):
-		var id = JSON.parse(body.get_string_from_utf8()).result
-		print("stopped " + id)
-
 func _on_area_area_exited(area):
-	var url = Game.get_tile_server() + "/led/" + Game.get_tile_for_keys(controls)
-	var headers = ["Content-Type: application/json"]
-	
-	print("dimming " + url)
-	
-	$HTTP_dim_tile.request(url, headers, false, HTTPClient.METHOD_DELETE, "")
+	if area.is_in_group("note"):
+		if is_instance_valid(note):
+			# Dim te tile
+			var url = Game.get_tile_server() + "/led/" + note.product
+			var headers = ["Content-Type: application/json"]
+			$HTTP_dim_tile.request(url, headers, false, HTTPClient.METHOD_DELETE, "")

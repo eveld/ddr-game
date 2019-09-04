@@ -22,9 +22,6 @@ func _process(_delta):
 			
 	if !game_over:
 		$score_label.text = "%d" % Game.score
-		
-		# Animate the grid...
-		$floor.get_surface_material(0).uv1_offset.z -= 0.05
 
 func _ready():
 	var data = _read_audio("res://" + Game.get_song() + ".json")
@@ -109,10 +106,3 @@ func _on_music_finished():
 
 func _on_gameover_timer_timeout():
 	var _err = get_tree().change_scene("res://Highscores.tscn")
-
-func _on_HTTPRequest_leave_game_request_completed(_result, response_code, _headers, _body):
-	if(response_code == 200):
-		pass
-func _on_HTTPRequest_clear_allocs_request_completed(result, response_code, headers, body):
-	if(response_code == 200):
-		pass

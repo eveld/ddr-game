@@ -1,14 +1,16 @@
 extends Spatial
 
 var allocation
+var product
 var color = Color()
 var material = load("res://note_null.material")
 
 var is_collected = false
 
-func setup(bar, id):
+func setup(_bar, id, prod, clr):
 	allocation = id
-	color = Color(bar.color)
+	product = prod
+	color = Color(clr)
 
 func collect():
 	is_collected = true

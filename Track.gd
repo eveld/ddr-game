@@ -15,6 +15,15 @@ var bar_instances = []
 
 var finished = false
 
+var product_colors = {
+	"nomad": Color("#25BA81"),
+	"vault": Color("#6a6d7a"),
+	"consul": Color("#c62a71"),
+	"vagrant": Color("#1563FF"),
+	"packer": Color("#1DAEFF"),
+	"terraform": Color("#5C4EE5")
+}
+
 func setup(game, track):
 	speed = game.speed
 	note_scale = game.note_scale
@@ -54,8 +63,8 @@ func _ready():
 	
 func _create_bar(bar):
 	var bar_instance = bar_scene.instance()
-	bar_instance.setup(self, bar)
-	bar_instance.translate(Vector3(0, 0, -bar_instances.size() * 8))
+	bar_instance.setup(self, bar, controls)
+	bar_instance.translate(Vector3(0, 0, -bar_instances.size() * 8 + 0.1))
 	add_child(bar_instance)
 		
 	bar_instances.append(bar_instance)
@@ -63,5 +72,8 @@ func _create_bar(bar):
 	
 func _create_pad():
 	var pad_instance = pad_scene.instance()
-	pad_instance.setup(self)
+	var colors = []
+	for c in controls:
+		colors.append(product_colors[Game.tiles[c]])
+	pad_instance.setup(self, colors)
 	add_child(pad_instance)
