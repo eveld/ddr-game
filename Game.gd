@@ -10,27 +10,33 @@ var songs = ["maidentradesbleeps", "beatstruck", "audio"]
 
 var game_id = ""
 var player_id = ""
-var server = ""
+var server = "http://api.google.ddr.demo.gs"
+
+# q, a, w, s, e, d
+var tiles = {
+	"q": "nomad",
+	"a": "vault",
+	"w": "consul", 
+	"s": "vagrant",
+	"e": "packer", 
+	"d": "terraform"
+}
+var tile_server = "http://localhost:5000"
+
+var rng = RandomNumberGenerator.new()
 
 func _ready():
 	print(OS.get_user_data_dir())
-	
-	# Set defaults from config file.
-	var file = File.new()
-	if(!file.file_exists("user://config.cfg")):
-		file.open("user://config.cfg", File.WRITE)
-		file.store_line("[server]")
-		file.store_line("url=\"http://localhost:9090\"")
-		file.store_line("[audio]")
-		file.store_line("songs=[\"maidentradesbleeps\", \"beatstruck\", \"audio\"]")
-		file.close()
-	
-	var config = ConfigFile.new()
-	var err = config.load("user://config.cfg")
-	if err == OK:
-		server = config.get_value("server", "url")
-		#songs = config.get_value("audio", "songs")
 
+func get_tile_server():
+	return tile_server
+
+func get_tile_for_keys(keys):
+	rng.set_seed(OS.get_unix_time())
+	rng.randomize()
+	var index = floor(rng.randi_range(0, len(keys)-1))
+	return tiles[keys[index]]
+	
 func set_server(endpoint):
 	server = endpoint
 	

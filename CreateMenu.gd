@@ -21,7 +21,7 @@ func _input(event):
 		create_game()
 		
 	if event.is_action_pressed("q"):
-		get_tree().change_scene("res://GameMenu.tscn")
+		var _err = get_tree().change_scene("res://GameMenu.tscn")
 
 func next_song():
 	song_index += 1

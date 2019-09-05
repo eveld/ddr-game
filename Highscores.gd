@@ -12,9 +12,13 @@ func _on_options_ready():
 func _on_HTTPRequest_high_scores_request_completed(_result, response_code, _headers, body):	
 	if(response_code == 200):
 		var response = JSON.parse(body.get_string_from_utf8()).result
-		var score_label = ""
 		for score in response:
 			var format_string = "%s     %d\n"
 			var line = format_string % [score.player, score.points]
-			score_label = score_label + line
-		$menu/options/scores.text = score_label
+			
+			if score.player == Game.get_player_id():
+				$menu/options/scores.push_color(Color(1, 0.32, 0.03))
+				$menu/options/scores.append_bbcode(line)
+				$menu/options/scores.pop()
+			else:
+				$menu/options/scores.append_bbcode(line)

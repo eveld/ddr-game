@@ -20,6 +20,7 @@ run/main_scene="res://MainMenu.tscn"
 config/use_custom_user_dir=true
 boot_splash/image="res://splash.png"
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
+config/icon="res://icon.png"
 
 [autoload]
 
@@ -70,7 +71,11 @@ d={
 [rendering]
 
 quality/driver/driver_name="GLES2"
+quality/driver/fallback_to_gles2=true
+quality/intended_usage/framebuffer_allocation=3
 vram_compression/import_etc=true
-vram_compression/import_etc2=false
+quality/reflections/texture_array_reflections=false
+quality/reflections/high_quality_ggx=false
 environment/default_clear_color=Color( 0.0627451, 0.0901961, 0.305882, 1 )
+quality/depth/hdr=false
 environment/default_environment="res://default_env.tres"

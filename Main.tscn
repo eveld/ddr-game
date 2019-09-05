@@ -1,11 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
-[ext_resource path="res://grid.png" type="Texture" id=2]
-[ext_resource path="res://udemyone.ogg" type="AudioStream" id=3]
-[ext_resource path="res://font_ingame_message.tres" type="DynamicFont" id=4]
-[ext_resource path="res://font_score.tres" type="DynamicFont" id=5]
-[ext_resource path="res://sun.png" type="Texture" id=6]
+[ext_resource path="res://font_ingame_message.tres" type="DynamicFont" id=2]
+[ext_resource path="res://font_score.tres" type="DynamicFont" id=3]
 
 [sub_resource type="ProceduralSky" id=1]
 
@@ -17,28 +14,10 @@ background_color = Color( 0.0313726, 0.0313726, 0.0313726, 1 )
 ambient_light_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="PlaneMesh" id=3]
-size = Vector2( 100, 50 )
+size = Vector2( 100, 0.5 )
 
 [sub_resource type="SpatialMaterial" id=4]
-flags_unshaded = true
-flags_vertex_lighting = true
-flags_albedo_tex_force_srgb = true
-flags_do_not_receive_shadows = true
-flags_disable_ambient_light = true
-albedo_texture = ExtResource( 2 )
-uv1_triplanar = true
-
-[sub_resource type="SpatialMaterial" id=5]
-flags_transparent = true
-flags_unshaded = true
-flags_vertex_lighting = true
-flags_no_depth_test = true
-flags_do_not_receive_shadows = true
-flags_disable_ambient_light = true
-albedo_texture = ExtResource( 6 )
-
-[sub_resource type="QuadMesh" id=6]
-material = SubResource( 5 )
+albedo_color = Color( 0, 1, 1, 1 )
 
 [node name="Main" type="Spatial"]
 script = ExtResource( 1 )
@@ -51,12 +30,11 @@ fov = 80.0
 far = 50.0
 
 [node name="floor" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -25 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16.2887 )
 mesh = SubResource( 3 )
 material/0 = SubResource( 4 )
 
 [node name="music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
 
 [node name="countdown_timer" type="Timer" parent="."]
 autostart = true
@@ -70,7 +48,7 @@ margin_left = -575.0
 margin_top = -183.5
 margin_right = 575.0
 margin_bottom = 183.5
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color_shadow = Color( 0.756863, 0.756863, 0.756863, 1 )
 custom_constants/shadow_offset_y = -5
 text = "ready?"
@@ -82,7 +60,7 @@ margin_left = 67.8303
 margin_top = 57.2789
 margin_right = 348.83
 margin_bottom = 211.279
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color_shadow = Color( 0.223529, 0.223529, 0.223529, 1 )
 custom_constants/shadow_offset_y = 2
 text = "0"
@@ -101,24 +79,22 @@ margin_left = -787.5
 margin_top = -183.5
 margin_right = 787.5
 margin_bottom = 183.5
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color_shadow = Color( 0.756863, 0.756863, 0.756863, 1 )
 custom_constants/shadow_offset_x = 0
 custom_constants/shadow_offset_y = -5
 text = "complete"
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 20, 0, 0, 0, 10, 0, 0, 0, 1, 0, 5, -50 )
-mesh = SubResource( 6 )
-material/0 = null
-
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( -0.990246, -0.114562, 0.0793036, 0, 0.569168, 0.822221, -0.139332, 0.814201, -0.563616, 0, 15.8394, -23.0614 )
+transform = Transform( -0.990246, -0.114562, 0.0793033, 0, 0.569168, 0.822221, -0.139332, 0.814201, -0.563616, 0, 15.8394, -31.8808 )
+light_specular = 0.0
 shadow_enabled = true
 directional_shadow_mode = 0
 
 [node name="HTTPRequest_leave_game" type="HTTPRequest" parent="."]
+
+[node name="HTTPRequest_clear_allocs" type="HTTPRequest" parent="."]
+use_threads = true
 [connection signal="finished" from="music" to="." method="_on_music_finished"]
 [connection signal="timeout" from="countdown_timer" to="." method="_on_countdown_timer_timeout"]
 [connection signal="timeout" from="gameover_timer" to="." method="_on_gameover_timer_timeout"]
-[connection signal="request_completed" from="HTTPRequest_leave_game" to="." method="_on_HTTPRequest_leave_game_request_completed"]
