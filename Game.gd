@@ -10,7 +10,6 @@ var songs = ["maidentradesbleeps", "beatstruck", "audio"]
 
 var game_id = ""
 var player_id = ""
-var server = "http://api.google.ddr.demo.gs"
 
 # q, a, w, s, e, d
 var tiles = {
@@ -21,12 +20,38 @@ var tiles = {
 	"e": "packer", 
 	"d": "terraform"
 }
-var tile_server = "http://localhost:5000"
+
+var game_server
+var tile_server
 
 var rng = RandomNumberGenerator.new()
 
+var params = {}
+
 func _ready():
 	print(OS.get_user_data_dir())
+	var args = OS.get_cmdline_args()
+	params = parse_args(args)
+		
+	var tile_param = "tile-server"
+	if tile_param in params:
+		tile_server = params[tile_param]
+	else:
+		tile_server = "http://localhost:9090"
+	
+	var game_param = "game-server"
+	if game_param in params:
+		game_server = params[game_param]
+	else:
+		game_server = "http://localhost:9000"
+
+func parse_args(args):
+	var p = {}
+	for arg in args:
+		var fields = arg.split("=", false, 1)
+		var key = fields[0].trim_prefix("-").trim_prefix("-")
+		p[key] = fields[1]
+	return p
 
 func get_tile_server():
 	return tile_server
@@ -38,10 +63,10 @@ func get_tile_for_keys(keys):
 	return tiles[keys[index]]
 	
 func set_server(endpoint):
-	server = endpoint
+	game_server = endpoint
 	
 func get_server():
-	return server
+	return game_server
 
 func set_game_id(id):
 	game_id = id

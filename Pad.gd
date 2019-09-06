@@ -38,7 +38,7 @@ func collect():
 		
 		if !dimming:
 			dimming = true
-			var url = "http://localhost:9090/led/" + note.product
+			var url = Game.get_tile_server() + "/led/" + note.product
 			var output = []
 			OS.execute("curl", ["-s", "-XDELETE", url], true, output)
 			dimming = false
@@ -72,7 +72,7 @@ func _on_area_entered(area):
 		# Get the tile for the note and light it
 		if !lighting:
 			lighting = true
-			var url = "http://localhost:9090/led/" + note.product
+			var url = Game.get_tile_server() + "/led/" + note.product
 			var output = []
 			OS.execute("curl", ["-s", "-XPOST", url], true, output)
 			lighting = false
@@ -85,7 +85,7 @@ func _on_area_area_exited(area):
 			# Dim te tile
 			if !dimming:
 				dimming = true
-				var url = "http://localhost:9090/led/" + note.product
+				var url = Game.get_tile_server() + "/led/" + note.product
 				var output = []
 				OS.execute("curl", ["-s", "-XDELETE", url], true, output)
 				dimming = false
