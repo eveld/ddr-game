@@ -26,7 +26,7 @@ func _process(_delta):
 func _ready():
 	var data = _read_audio("res://" + Game.get_song() + ".json")
 	var audio_file = "res://" + data.audio.download_link
-	if File.new().file_exists(audio_file):
+	if File.new().file_exists(audio_file + ".import"):
 		var sfx = load(audio_file)
 		$music.stream = sfx
 	

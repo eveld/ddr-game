@@ -93,6 +93,7 @@ func _on_area_area_exited(area):
 				
 				#var headers = ["Content-Type: application/json"]
 				#$HTTP_dim_tile.request(url, headers, false, HTTPClient.METHOD_DELETE, "")
+			note = null
 
 
 func _on_HTTP_light_tile_request_completed(result, response_code, headers, body):

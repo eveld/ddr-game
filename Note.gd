@@ -23,5 +23,5 @@ func _ready():
 		
 		$label/node/id.text = allocation
 		
-	$mesh.set_surface_material(0, material)
+	$area/collision/mesh.set_surface_material(0, material)
 	

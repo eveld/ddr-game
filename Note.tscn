@@ -3,6 +3,8 @@
 [ext_resource path="res://Note.gd" type="Script" id=1]
 [ext_resource path="res://font_note.tres" type="DynamicFont" id=2]
 
+[sub_resource type="BoxShape" id=5]
+
 [sub_resource type="CubeMesh" id=1]
 
 [sub_resource type="ViewportTexture" id=2]
@@ -21,8 +23,6 @@ albedo_texture = SubResource( 2 )
 [sub_resource type="QuadMesh" id=4]
 resource_local_to_scene = true
 material = SubResource( 3 )
-
-[sub_resource type="BoxShape" id=5]
 
 [node name="Note" type="Spatial"]
 script = ExtResource( 1 )
@@ -45,17 +45,6 @@ text = "null"
 align = 1
 valign = 1
 
-[node name="mesh" type="MeshInstance" parent="."]
-transform = Transform( 0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
-mesh = SubResource( 1 )
-material/0 = null
-
-[node name="quad" type="MeshInstance" parent="mesh"]
-transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 5, 0, 1.74135, 0.0447323 )
-cast_shadow = 0
-mesh = SubResource( 4 )
-material/0 = null
-
 [node name="area" type="Area" parent="." groups=[
 "note",
 ]]
@@ -64,3 +53,14 @@ transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 [node name="collision" type="CollisionShape" parent="area"]
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 shape = SubResource( 5 )
+
+[node name="mesh" type="MeshInstance" parent="area/collision"]
+transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="quad" type="MeshInstance" parent="area/collision/mesh"]
+transform = Transform( 2, 0, 0, 0, 1, 0, 0, 0, 5, 0, 1.74135, 0.0447323 )
+cast_shadow = 0
+mesh = SubResource( 4 )
+material/0 = null

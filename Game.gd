@@ -33,7 +33,7 @@ func _ready():
 	var args = OS.get_cmdline_args()
 	params = parse_args(args)
 		
-	var tile_param = "tile-server"
+	var tile_param = "led-server"
 	if tile_param in params:
 		tile_server = params[tile_param]
 	else:
